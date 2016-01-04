@@ -156,6 +156,9 @@ GEM
     rails-assets-bootstrap (3.3.6)
       rails-assets-jquery (>= 1.9.1, < 3)
     rails-assets-jquery (2.1.4)
+    rails-assets-normalize.scss (4.0.3)
+      rails-assets-support-for (~> 1.0.2)
+    rails-assets-support-for (1.0.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -266,6 +269,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.5)
   rails-assets-bootstrap!
+  rails-assets-normalize.scss!
   rspec-rails (~> 3.0)
   rubocop
   sass-rails (~> 5.0)
