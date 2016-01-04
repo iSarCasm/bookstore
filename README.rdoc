@@ -7,14 +7,14 @@
 - Init rubocop
 - Init Guard (rspec and rubocop)
 - Prepare to Front-End:
-   * Bootstrap
-   * jQuery
-   * HAML
-   * Compass(???)
+* Bootstrap
+* jQuery
+* HAML
+* Compass(???)
 - Production server
-   * PostgreSQL
-   * nginx + Unicorn
-   * Capistrano
+* PostgreSQL
+* nginx + Unicorn
+* Capistrano
 
 == 1. Booke-pedia
 - Visitors can preview books divided into categories
