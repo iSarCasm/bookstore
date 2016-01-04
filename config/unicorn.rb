@@ -1,4 +1,4 @@
-#application root path
+# application root path
 app_root = "/var/www/bookstore"
 
 # Set the working application directory
