@@ -3,16 +3,9 @@ AllCops:
     - Rakefile
     - config.ru
   Exclude:
-    - db/schema.rb
-Rails:
-  Enabled: true
+    - bin/**
+    - db/**
+    - spec/**
 
-StringLiterals:
+Documentation:
   Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/IfUnlessModifier:
-  Exclude:
-    - 'spec/spec_helper.rb'
