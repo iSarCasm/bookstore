@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 gem 'pg'
+gem 'unicorn'
 
 # Asset Pipeline
 gem "haml-rails", "~> 0.9"
