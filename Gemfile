@@ -24,5 +24,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'rubocop', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop', require: false
   gem 'spring'
 end
