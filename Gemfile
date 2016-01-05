@@ -38,4 +38,6 @@ group :development do
   gem 'guard-rspec',    require: false
   gem 'guard-rubocop',  require: false
   gem 'spring'
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-unicorn-nginx', '~> 3.2.0'
 end
