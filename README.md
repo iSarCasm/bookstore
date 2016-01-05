@@ -1,7 +1,7 @@
 # Bookstore with Ruby on Rails
 [![Build Status](https://travis-ci.org/iSarCasm/bookstore.svg?branch=master)](https://travis-ci.org/iSarCasm/bookstore)
 
-## Agile TODO list
+= Agile TODO list
 == 0. Setup the environment
 - Init git repo (use SSL)
 - .ruby-version & .ruby-gemset
