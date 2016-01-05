@@ -19,14 +19,14 @@
   * nginx + Unicorn
   * Capistrano
 
-## 1. Booke-pedia
+## 1 Sprint
 - Visitors can preview books divided into categories
 - Books have an Author, Title, Images, Description, Price, Quantity
 - Author has Name, Books, Born-date, Country, Description
 - Categories have Name, Books
 - Page pagination with Kaminari
 
-## 2. Book store
+## 2 Sprint
 - Shopping cart
 - User registration and authorization
 - User has Email, Password, FullName, Billing Address, Delivery Address, Orders
@@ -34,11 +34,11 @@
 - Orders
 - Coupons
 
-## 3. CMS-ing
+## 3 Sprint
 - I18n
 - RailsAdmin
 
-## 4. Features
+## 4 Sprint
 - Leaving Reviews
 - Bestsellers
 - Mailer
@@ -46,15 +46,15 @@
 - Facebook auth
 - Password Reset
 
-## 5. Top-Features
+## 5 Sprint
 - Git, Twitter and VK auth
 - Book sort
 - Metrics
 
-## 6. Luxury features
+## 6 Sprint
 - Benchmarking
 - Security
 
-## 7. Wtf features
+## 7 Sprint
 - Live Help
 - Book API (related books)
