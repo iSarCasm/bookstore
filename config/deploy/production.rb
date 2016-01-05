@@ -6,6 +6,7 @@
 
 role :app, %w{root@45.55.152.254}
 
+set :bundle_env_variables, { nokogiri_use_system_libraries: 1 }
 
 # Extended Server Syntax
 # ======================
