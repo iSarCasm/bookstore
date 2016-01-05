@@ -19,4 +19,5 @@ RSpec.describe Book, type: :model do
   # it { should validate_numericality_of(:quantity).only_integer }
 
   it { should have_many(:authors).through(:book_owns) }
+  it { should have_many(:categories).through(:category_books) }
 end
