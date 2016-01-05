@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
+require_relative 'matchers/currency_validator'
 
 ActiveRecord::Migration.maintain_test_schema!
 Shoulda::Matchers.configure do |config|
