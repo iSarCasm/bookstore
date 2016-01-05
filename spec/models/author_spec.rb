@@ -10,5 +10,5 @@ RSpec.describe Author, type: :model do
   it { should validate_presence_of :name }
   it { should validate_uniqueness_of :name }
 
-  # it { should have_many :books }
+  it { should have_many(:books).through(:book_owns) }
 end

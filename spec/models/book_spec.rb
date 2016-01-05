@@ -18,5 +18,5 @@ RSpec.describe Book, type: :model do
   # https://github.com/thoughtbot/shoulda-matchers/issues/849
   # it { should validate_numericality_of(:quantity).only_integer }
 
-  # it { should belong_to :author }
+  it { should have_many(:authors).through(:book_owns) }
 end
