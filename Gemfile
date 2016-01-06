@@ -18,7 +18,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
 end
 
-
+gem 'kaminari'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -32,6 +32,7 @@ group :development, :test do
   gem 'factory_girl'
   gem 'pry'
   gem 'awesome_print'
+  gem 'kaminari-rspec'
 end
 
 group :development do

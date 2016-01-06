@@ -8,6 +8,8 @@
             %strong= book.title
             %p= book.desc
             %p= book.price
+        .row
+          = paginate @books
       .col-md-4
         %h2 Categories
         - @categories.each do |category|

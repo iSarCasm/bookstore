@@ -15,4 +15,6 @@ class Book < ActiveRecord::Base
     only_integer: true,
     greater_than_or_equal_to: 0
   }
+
+  paginates_per 9
 end

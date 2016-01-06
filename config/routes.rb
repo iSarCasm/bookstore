@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  get '/(:page)', to: 'pages#index', as: :index_page
 end

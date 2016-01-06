@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'kaminari_rspec'
 require_relative 'matchers/currency_validator'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -38,4 +39,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     FactoryGirl.find_definitions
   end
+
+  # Kaminari
+  config.include KaminariRspec::TestHelpers, :type => :controller
 end
