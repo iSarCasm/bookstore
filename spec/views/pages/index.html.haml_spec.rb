@@ -3,7 +3,7 @@ RSpec.describe 'pages/index.html.haml' do
   context 'when anyone visits the page' do
     it 'shows many books', verify_stubs: false do
       assign(:categories, build_list(:category, 3))
-      books = assign(:books, create_list(:book, 5))
+      books = assign(:books, build_list(:book, 5))
       pagination_stub(books)
       render
       books.each do |book|
@@ -12,7 +12,7 @@ RSpec.describe 'pages/index.html.haml' do
     end
 
     it 'shows existing categories', verify_stubs: false do
-      books = assign(:books, create_list(:book, 5))
+      books = assign(:books, build_list(:book, 5))
       pagination_stub(books)
       categories = assign(:categories, build_list(:category, 3))
       render
