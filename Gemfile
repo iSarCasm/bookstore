@@ -42,6 +42,7 @@ group :development do
   gem 'guard-rubocop',  require: false
   gem 'spring'
   gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-safe-deploy-to', '~> 1.1.1'
   gem 'capistrano-unicorn-nginx', '~> 3.2.0'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', '~> 1.1.2'
