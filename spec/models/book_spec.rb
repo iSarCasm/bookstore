@@ -15,6 +15,8 @@ RSpec.describe Book, type: :model do
   it { should validate_currency_of :price }
   it { should validate_numericality_of(:quantity)
         .is_greater_than_or_equal_to(0)}
+
+  # wtf
   # https://github.com/thoughtbot/shoulda-matchers/issues/849
   # it { should validate_numericality_of(:quantity).only_integer }
 

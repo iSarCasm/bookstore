@@ -1,0 +1,10 @@
+= @author.name
+= @author.desc
+= @author.born
+= @author.country
+- if @author.books
+  %ol
+  - @author.books.each do |book|
+    %li= book.title
+- else
+  %p 'Has no books published yet.'

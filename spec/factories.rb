@@ -1,9 +1,21 @@
 FactoryGirl.define do
   factory :author do
+    transient do
+      book_count 0 # wtf: if 1 = big bang
+    end
+
     sequence(:name) { |n| Faker::Name.name + n.to_s }
     desc    { Faker::Lorem.sentence }
     born    { Faker::Date.between(60.years.ago, 20.years.ago) }
     country { Faker::Address.country }
+
+    # wtf
+    after(:build) do |author, evaluator|
+      author.books = build_list(:book, evaluator.book_count)
+    end
+    after(:create) do |author, evaluator|
+      author.books = create_list(:book, evaluator.book_count)
+    end
   end
 
   factory :category do
@@ -12,8 +24,8 @@ FactoryGirl.define do
 
   factory :book do
     transient do
-      category_count  1
-      authors_count   1
+      category_count  0 # wtf: if 1 = big bang
+      authors_count   0
     end
 
     sequence(:title) { |n| Faker::Book.title + n.to_s }
