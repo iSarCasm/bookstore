@@ -3,14 +3,9 @@
     .row
       .col-md-8
         %h2 Books
-        - @books.each.with_index do |book, i|
-          .col-md-4.book
-            %strong= book.title
-            %p= book.desc
-            %p= book.price
+        = render @books
         .row.page-pagination
           = paginate @books
       .col-md-4
         %h2 Categories
-        - @categories.each do |category|
-          %p= category.name
+        = render @categories
