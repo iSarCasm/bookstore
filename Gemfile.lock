@@ -44,10 +44,10 @@ GEM
     autoprefixer-rails (6.2.3)
       execjs
       json
+    awesome_print (1.6.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (8.2.1)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -285,7 +285,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
-  byebug
+  awesome_print
   capistrano (~> 3.2.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)
@@ -303,6 +303,7 @@ DEPENDENCIES
   jquery-rails
   normalize-rails
   pg
+  pry
   rails (= 4.2.5)
   rails-assets-bootstrap!
   rspec-rails (~> 3.0)

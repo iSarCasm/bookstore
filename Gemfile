@@ -30,7 +30,8 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.0'
   gem 'faker'
   gem 'factory_girl'
-  gem 'byebug'
+  gem 'pry'
+  gem 'awesome_print'
 end
 
 group :development do
