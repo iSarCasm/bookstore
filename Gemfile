@@ -22,13 +22,13 @@ gem 'kaminari'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.0'
-  gem 'faker'
   gem 'factory_girl'
   gem 'pry'
   gem 'awesome_print'
