@@ -3,9 +3,9 @@ AllCops:
     - Rakefile
     - config.ru
   Exclude:
-    - bin/**
-    - db/**
-    - spec/**
+    - bin/**/*
+    - db/**/*
+    - spec/**/*
     - config/**/*
 
 Documentation:
