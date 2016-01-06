@@ -1,3 +1,5 @@
+require 'Faker'
+
 Category.create([
     { id: 0, name: 'Ruby' },
     { id: 1, name: 'Design-Patterns'},
