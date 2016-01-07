@@ -21,6 +21,26 @@ RSpec.describe 'pages/index.html.haml' do
       end
     end
 
+    it 'has links to a books', verify_stubs: false do
+      assign(:categories, build_list(:category, 3))
+      books = assign(:books, build_list(:book, 5))
+      pagination_stub(books)
+      render
+      books.each do |book|
+        expect(rendered).to have_link(nil, href: book_path(book)) # wtf?
+      end
+    end
+
+    it 'has links to a categories', verify_stubs: false do
+      categories = assign(:categories, build_list(:category, 3))
+      books = assign(:books, build_list(:book, 5))
+      pagination_stub(books)
+      render
+      categories.each do |category|
+        expect(rendered).to have_link(nil, href: index_path(category: category))
+      end
+    end
+
     it 'has page links', verify_stubs: false do
       assign(:categories, build_list(:category, 3))
       books = assign(:books, build_list(:book, 50))

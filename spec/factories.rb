@@ -4,6 +4,7 @@ FactoryGirl.define do
       book_count 0 # wtf: if 1 = big bang
     end
 
+    sequence(:id)   { |n| n }
     sequence(:name) { |n| Faker::Name.name + n.to_s }
     desc    { Faker::Lorem.sentence }
     born    { Faker::Date.between(60.years.ago, 20.years.ago) }
@@ -19,6 +20,7 @@ FactoryGirl.define do
   end
 
   factory :category do
+    sequence(:id)   { |n| n }
     sequence(:name) { |n| Faker::Book.genre + n.to_s }
   end
 
@@ -28,6 +30,7 @@ FactoryGirl.define do
       authors_count   0
     end
 
+    sequence(:id)   { |n| n }
     sequence(:title) { |n| Faker::Book.title + n.to_s }
     desc        { Faker::Lorem.sentence }
     quantity    { rand(1..20) }

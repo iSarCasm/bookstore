@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/(:page)', to: 'pages#index', as: :index_page
+  get '/', to: 'pages#index', as: :index
   resources :books, only: [:show]
   resources :authors, only: [:show]
 end
