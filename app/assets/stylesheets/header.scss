@@ -1,0 +1,31 @@
+.nav {
+  margin: 0;
+}
+
+.navbar-collapse { border: 0; }
+
+.navbar {
+  background-color: white;
+}
+
+.icon-bar { color: black; background-color: black; }
+
+.navbar-brand {
+  font-size: 24px;
+  text-transform: capitalize;
+}
+
+.navbar-nav {
+  a {
+    font-size: 14px;
+    color: black;
+    font-weight: 300;
+  }
+  li {
+    background-color: white;
+  }
+}
+
+.cart {
+  text-transform: uppercase;
+}

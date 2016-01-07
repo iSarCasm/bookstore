@@ -1,0 +1,33 @@
+%nav.navbar.navbar-custom.navbar-fixed-top
+  .container
+    .navbar-header.page-scroll
+      %button.navbar-toggle.collapsed{"aria-controls" => "navbar",
+                                      "aria-expanded" => "false",
+                                      "data-target" => "#navbar",
+                                      "data-toggle" => "collapse",
+                                      :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-brand The Bookstore
+    #navbar.collapse.navbar-collapse.navbar-main-collapse
+      .navbar-left
+        %ul.nav.navbar-nav
+          %li
+            %a{href: '/'} Home
+          %li
+            %a{href: '/shop'} Shop
+      .navbar-right
+        %ul.nav.navbar-nav
+          %li.cart
+            %a{:href => "/cart"}
+              = icon('shopping-cart')
+              %strong Cart
+              (EMPTY)
+          %li.active
+            %a{:href => "/settings"} Settings
+          %li
+            %a{:href => "/orders"} Orders
+          %li
+            %a{:href => "/sign-out"} Sign Out
