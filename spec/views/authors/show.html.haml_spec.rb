@@ -32,4 +32,12 @@ RSpec.describe "authors/show", type: :view do
       expect(rendered).to have_content book.title
     end
   end
+
+  it 'links to books' do
+    author = assign(:author, build(:author, book_count: 3))
+    render
+    author.books.each do |book|
+      expect(rendered).to have_link(nil, href: book_path(book))
+    end
+  end
 end

@@ -18,6 +18,8 @@
         %strong Books:
         %ol
         - @author.books.each do |book|
-          %li= book.title
+          %li
+            = book.title
+            %a{href: book_path(book)}= icon('link')
       - else
         %p 'Has no books published yet.'
