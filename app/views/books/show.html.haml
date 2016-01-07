@@ -3,7 +3,7 @@
     %h2= @book.title
     %p
       %strong Price:
-      = @book.price
+      = number_to_currency @book.price
     %p
       %strong= 'Author'.pluralize(@book.authors.count) + ':'
       - @book.authors.each do |author|
