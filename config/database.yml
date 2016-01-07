@@ -1,25 +1,4 @@
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: bookstore_production
-  host: localhost
-  pool: 5
-  username: postgres
-  password: postgres
-
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: bookstore_development
-  host: localhost
-  pool: 5
-  username: postgres
-  password: postgres
-
 test:
   adapter: postgresql
-  encoding: unicode
-  database: bookstore_test
-  pool: 5
+  database: travis_ci_test
   username: postgres
-  password: postgres
