@@ -19,12 +19,13 @@ RSpec.describe "books/show", type: :view do
       render
       expect(rendered).to have_content book.price
     end
-  end
 
-  context 'when book not found' do
-    it 'displays error message' do
+    it 'displays books authors' do
+      book = assign(:book, build(:book, authors_count: 3))
       render
-      expect(rendered).to have_css "p.error"
+      book.authors.each do |author|
+        expect(rendered).to have_content author.name
+      end
     end
   end
 end
