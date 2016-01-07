@@ -5,6 +5,8 @@ set :application, 'bookstore'
 set :repo_url, 'git@github.com:iSarCasm/bookstore.git'
 set :branch, 'deploy'
 set :pty, true
+# Defaults to [:web]
+set :assets_roles, [:web, :app]
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
