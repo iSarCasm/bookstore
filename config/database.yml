@@ -21,6 +21,5 @@ test:
   encoding: unicode
   database: bookstore_test
   pool: 5
-  host: localhost
   username: postgres
   password: postgres
