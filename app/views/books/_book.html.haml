@@ -1,4 +1,4 @@
 .col-md-4.col-sm-6.book
   %strong= book.title
-  %p= book.desc
-  %p= book.price
+  %p= truncate(book.desc, length: 100, separator: ' ')
+  %p= number_to_currency(book.price)
