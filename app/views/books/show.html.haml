@@ -6,7 +6,8 @@
       = @book.price
     %p
       %strong= 'Author'.pluralize(@book.authors.count) + ':'
-      = @book.authors.map(&:name).join(', ')
+      - @book.authors.each do |author|
+        %a{href: author_path(author)}= author.name + ';' # wtf
     %p
       %strong Description:
       = @book.desc
