@@ -2,15 +2,25 @@ require 'rails_helper'
 
 RSpec.describe AuthorsController, type: :controller do
   describe '#show' do
-    it 'successfully renders page' do
-      get :show, id: 0
-      expect(response.status).to eq(200)
-    end
+    context 'when author found' do
+      it 'successfully renders page' do
+        create(:author, id: 0 )
+        get :show, id: 0
+        expect(response.status).to eq(200)
+      end
 
-    it 'assigns @author' do
-      author = create(:author, id: 0)
+      it 'assigns @author' do
+        author = create(:author, id: 0)
+        get :show, id: 0
+        expect(assigns(:author)).to eq author
+      end
+    end
+  end
+
+  context 'when no author found' do
+    it 'renders 404 error' do
       get :show, id: 0
-      expect(assigns(:author)).to eq author
+      expect(response.status).to eq 404
     end
   end
 end

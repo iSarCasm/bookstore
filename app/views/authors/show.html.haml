@@ -1,10 +1,23 @@
-= @author.name
-= @author.desc
-= @author.born
-= @author.country
-- if @author.books
-  %ol
-  - @author.books.each do |book|
-    %li= book.title
-- else
-  %p 'Has no books published yet.'
+.container
+  .row
+    .col-xs-12
+      %h2= @author.name
+      - if @author.born
+        %p
+          %strong Born:
+          = @author.born
+      - if @author.country
+        %p
+          %strong Country
+          = @author.country
+      - if @author.desc
+        %p
+          %strong About:
+          = @author.desc
+      - if @author.books
+        %strong Books:
+        %ol
+        - @author.books.each do |book|
+          %li= book.title
+      - else
+        %p 'Has no books published yet.'
