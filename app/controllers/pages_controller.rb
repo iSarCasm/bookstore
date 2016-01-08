@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @books = paginate(books_from_category(params[:category]))
+    @books = books_from_category(params[:category]).page(params[:page])
     @categories = Category.all
   end
 
@@ -8,16 +8,10 @@ class PagesController < ApplicationController
 
   def books_from_category(category)
     if category
-      # wtf i am so bad
-      Book.all.preload(:categories).to_a.select do |book|
-        book.categories.map(&:id).include? category.to_i
-      end
+      Book.joins(:category_books)
+        .where("category_books.category_id = ?", category)
     else
       Book.all
     end
-  end
-
-  def paginate(array)
-    Kaminari.paginate_array(array).page(params[:page]).per(9)
   end
 end
