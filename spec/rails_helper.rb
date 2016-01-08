@@ -25,9 +25,11 @@ RSpec.configure do |config|
   end
 
   config.around(:each) do |example|
+    Capybara.reset_sessions!
     DatabaseCleaner.cleaning do
       example.run
     end
+    Capybara.reset_sessions!
   end
 
   config.use_transactional_fixtures = true
