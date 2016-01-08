@@ -15,4 +15,6 @@
     %p
       %strong Description:
       = @book.desc
-    %button.btn.btn-primary Add to Cart
+    %a.btn.btn-primary{ href: cart_add_path(book: @book),
+                        data: {method: 'patch'} }
+      Add to Cart
