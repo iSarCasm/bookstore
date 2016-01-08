@@ -16,11 +16,4 @@ RSpec.describe AuthorsController, type: :controller do
       end
     end
   end
-
-  context 'when no author found' do
-    it 'renders 404 error' do
-      get :show, id: 0
-      expect(response.status).to eq 404
-    end
-  end
 end

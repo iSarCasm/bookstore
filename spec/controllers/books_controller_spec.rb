@@ -15,12 +15,5 @@ RSpec.describe BooksController, type: :controller do
         expect(assigns(:book)).to eq book
       end
     end
-
-    context 'when book not found' do
-      it 'redirect to 404' do
-        get :show, id: 1
-        expect(response.status).to eq(404)
-      end
-    end
   end
 end
