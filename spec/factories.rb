@@ -26,7 +26,7 @@ FactoryGirl.define do
 
   factory :book do
     transient do
-      category_count  0 # wtf: if 1 = big bang
+      categories_count  0 # wtf: if 1 = big bang
       authors_count   0
     end
 
@@ -38,11 +38,11 @@ FactoryGirl.define do
 
     # wtf
     after(:build) do |book, evaluator|
-      book.categories = build_list(:category, evaluator.category_count)
+      book.categories = build_list(:category, evaluator.categories_count)
       book.authors    = build_list(:author, evaluator.authors_count)
     end
     after(:create) do |book, evaluator|
-      book.categories = create_list(:category, evaluator.category_count)
+      book.categories = create_list(:category, evaluator.categories_count)
       book.authors    = create_list(:author, evaluator.authors_count)
     end
   end

@@ -28,6 +28,14 @@ RSpec.describe "books/show", type: :view do
       end
     end
 
+    it 'displays books categories' do
+      book = assign(:book, build(:book, categories_count: 3))
+      render
+      book.categories.each do |category|
+        expect(rendered).to have_content category.name
+      end
+    end
+
     it 'links to books authors' do
       book = assign(:book, build(:book, authors_count: 3))
       render

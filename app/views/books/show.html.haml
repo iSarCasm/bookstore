@@ -5,6 +5,10 @@
       %strong Price:
       = number_to_currency @book.price
     %p
+      %strong= 'Category'.pluralize(@book.categories.count) + ':'
+      - @book.categories.each do |category|
+        = category.name + ';'
+    %p
       %strong= 'Author'.pluralize(@book.authors.count) + ':'
       - @book.authors.each do |author|
         %a{href: author_path(author)}= author.name + ';' # wtf
