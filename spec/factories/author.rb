@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :author do
     transient do
-      book_count 0 # wtf: if 1 = big bang
+      book_count 1
     end
 
     sequence(:id)   { |n| n }
@@ -10,12 +10,17 @@ FactoryGirl.define do
     born    { Faker::Date.between(60.years.ago, 20.years.ago) }
     country { Faker::Address.country }
 
-    # wtf
     after(:build) do |author, evaluator|
-      author.books = build_list(:book, evaluator.book_count)
+      if author.books.empty?
+        author.books = build_list(:book,
+          evaluator.book_count, authors: [author])
+      end
     end
     after(:create) do |author, evaluator|
-      author.books = create_list(:book, evaluator.book_count)
+      if author.books.empty?
+        author.books = create_list(:book,
+          evaluator.book_count, authors: [author])
+      end
     end
   end
 end

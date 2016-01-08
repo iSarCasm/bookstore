@@ -6,16 +6,14 @@
       = number_to_currency @book.price
     %p
       %strong= 'Category'.pluralize(@book.categories.count) + ':'
-      - @book.categories.each do |category|
-        = category.name + ';'
+      = categories_links(@book.categories)
     %p
       %strong= 'Author'.pluralize(@book.authors.count) + ':'
-      - @book.authors.each do |author|
-        %a{href: author_path(author)}= author.name + ';' # wtf
+      = author_links(@book.authors)
     %p
       %strong Description:
       = @book.desc
-    %a.btn.btn-primary{ href: cart_add_path(book: @book),
+    %a.btn.btn-primary{ href: cart_update_path(book: @book),
                         data: { method: 'patch',
                                 remote: false } }
       Add to Cart

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :book do
     transient do
-      categories_count  0 # wtf: if 1 = big bang
-      authors_count   0
+      categories_count  1
+      authors_count   1
     end
 
     sequence(:id)   { |n| n }
@@ -11,14 +11,28 @@ FactoryGirl.define do
     quantity    { rand(1..20) }
     price       { Faker::Number.decimal(2) }
 
-    # wtf
     after(:build) do |book, evaluator|
-      book.categories = build_list(:category, evaluator.categories_count)
-      book.authors    = build_list(:author, evaluator.authors_count)
+      if book.categories.empty?
+        book.categories = build_list(:category,
+          evaluator.categories_count, books: [book])
+      end
+
+      if book.authors.empty?
+        book.authors    = build_list(:author,
+          evaluator.authors_count, books: [book])
+      end
     end
+
     after(:create) do |book, evaluator|
-      book.categories = create_list(:category, evaluator.categories_count)
-      book.authors    = create_list(:author, evaluator.authors_count)
+      if book.categories.empty?
+        book.categories = create_list(:category,
+          evaluator.categories_count, books: [book])
+      end
+
+      if book.authors.empty?
+        book.authors    = create_list(:author,
+          evaluator.authors_count, books: [book])
+      end
     end
   end
 end

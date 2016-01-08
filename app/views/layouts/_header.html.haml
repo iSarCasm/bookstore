@@ -24,7 +24,7 @@
             %a{:href => "/cart"}
               = icon('shopping-cart')
               %strong Cart
-              = current_cart.items.size || '(EMPTY)'
+              = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)")
           %li.active
             %a{:href => "/settings"} Settings
           %li

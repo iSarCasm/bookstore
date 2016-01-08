@@ -20,14 +20,6 @@ RSpec.describe "books/show", type: :view do
       expect(rendered).to have_content book.price
     end
 
-    it 'displays books authors' do
-      book = assign(:book, build(:book, authors_count: 3))
-      render
-      book.authors.each do |author|
-        expect(rendered).to have_content author.name
-      end
-    end
-
     it 'displays books categories' do
       book = assign(:book, build(:book, categories_count: 3))
       render
@@ -40,7 +32,7 @@ RSpec.describe "books/show", type: :view do
       book = assign(:book, build(:book, authors_count: 3))
       render
       book.authors.each do |author|
-        expect(rendered).to have_link(nil, href: author_path(author))
+        expect(rendered).to have_link(author.name, href: author_path(author))
       end
     end
 
@@ -48,7 +40,7 @@ RSpec.describe "books/show", type: :view do
       book = assign(:book, build(:book))
       render
       expect(rendered)
-        .to have_link('Add to Cart', href: cart_add_path(book: book))
+        .to have_link('Add to Cart', href: cart_update_path(book: book))
     end
   end
 end

@@ -1,19 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe CartsController, type: :controller do
-  describe "#add" do
+RSpec.describe ShoppingCartsController, type: :controller do
+  describe "#update" do
     before { request.env["HTTP_REFERER"] = index_url }
 
     it 'redirects back' do
-      patch :add
+      patch :update
       expect(response).to redirect_to :back
     end
 
     context 'when trying to add valid item' do
-      # wtf ?
       it 'adds item to cart' do
-        create(:book, id: 0)
-        expect{patch :add, book: 0}.to change{controller.current_cart.items}
+        book = create(:book, id: 0)
+        expect{patch :update, book: book}.to change{controller.current_cart.items}
       end
     end
   end

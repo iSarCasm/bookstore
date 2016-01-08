@@ -13,3 +13,9 @@ Documentation:
 
 StringLiterals:
   Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false

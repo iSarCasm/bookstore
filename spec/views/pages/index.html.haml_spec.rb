@@ -27,7 +27,7 @@ RSpec.describe 'pages/index.html.haml' do
       pagination_stub(books)
       render
       books.each do |book|
-        expect(rendered).to have_link(nil, href: book_path(book)) # wtf?
+        expect(rendered).to have_link(nil, href: book_path(book))
       end
     end
 

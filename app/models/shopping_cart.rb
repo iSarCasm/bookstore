@@ -2,7 +2,7 @@ class ShoppingCart
   attr_reader :items
   SESSION_KEY = :cart
 
-  def initialize(session)
+  def initialize(session = {})
     @@session = session
     @items = []
     restore(session[SESSION_KEY])
@@ -15,6 +15,10 @@ class ShoppingCart
       @items << CartItem.new(book_id)
     end
     save
+  end
+
+  def size
+    @items.inject(0) { |size, item| size + item.quantity }
   end
 
   private

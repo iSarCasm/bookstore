@@ -4,12 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_cart
-    if session[:cart].is_a?(ShoppingCart)
-      session[:cart]
-    else
-      session[:cart] = ShoppingCart.new(session)
-    end
+    @_shopping_cart ||= ShoppingCart.new(session)
   end
-  # wtf
   helper_method :current_cart
 end
