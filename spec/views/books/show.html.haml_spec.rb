@@ -43,5 +43,11 @@ RSpec.describe "books/show", type: :view do
         expect(rendered).to have_link(nil, href: author_path(author))
       end
     end
+
+    it "has 'add to cart' button" do
+      book = assign(:book, build(:book))
+      render
+      expect(rendered).to have_button 'Add to Cart'
+    end
   end
 end
