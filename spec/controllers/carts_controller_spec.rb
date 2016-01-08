@@ -10,10 +10,10 @@ RSpec.describe CartsController, type: :controller do
     end
 
     context 'when trying to add valid item' do
+      # wtf ?
       it 'adds item to cart' do
-        expect(controller.current_cart).to receive(:add).with("0")
         create(:book, id: 0)
-        patch :add, book: 0
+        expect{patch :add, book: 0}.to change{controller.current_cart.items}
       end
     end
   end
