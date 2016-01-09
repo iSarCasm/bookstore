@@ -39,6 +39,13 @@ set :assets_roles, [:web, :app]
 
 namespace :deploy do
 
+  desct 'Work please'
+  task :ensure do
+    invoke 'deploy'
+    invoke 'bundler:install'
+    invoke 'deploy:migrate'
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
