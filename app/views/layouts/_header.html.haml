@@ -21,13 +21,19 @@
       .navbar-right
         %ul.nav.navbar-nav
           %li.cart
-            %a{:href => "/cart"}
+            %a{href: "/cart"}
               = icon('shopping-cart')
               %strong Cart
               = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)")
           %li.active
-            %a{:href => "/settings"} Settings
+            %a{href: "/settings"} Settings
           %li
-            %a{:href => "/orders"} Orders
-          %li
-            %a{:href => "/sign-out"} Sign Out
+            %a{href: "/orders"} Orders
+          - if user_signed_in?
+            %li
+              %a{href: "/sign-out"} Sign Out
+          - else
+            %li
+              %a{href: new_user_registration_path} Sign Up
+            %li
+              %a{href: new_user_session_path} Sign In

@@ -21,4 +21,28 @@ RSpec.describe "layouts/_header", type: :view, verify_stubs: false do
       expect(rendered).to have_content '(3 items)'
     end
   end
+
+  describe 'displays Login status' do
+    before { stub_view(ShoppingCart.new) }
+
+    context 'when user signed out' do
+      it "shows 'sign in' link" do
+        render
+        expect(rendered).to have_link 'Sign In'
+      end
+
+      it "it shows 'sign up' link" do
+        render
+        expect(rendered).to have_link 'Sign Up'
+      end
+    end
+
+    context 'when user signed in' do
+      it "shows 'sign out' link" do
+        sign_in create(:user)
+        render
+        expect(rendered).to have_link 'Sign Out'
+      end
+    end
+  end
 end
