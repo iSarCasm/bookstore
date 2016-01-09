@@ -49,3 +49,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
 end
+
+group :test do
+  gem 'simplecov', require: false
+end
