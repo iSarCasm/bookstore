@@ -39,7 +39,7 @@ set :assets_roles, [:web, :app]
 
 namespace :deploy do
 
-  desct 'Work please'
+  desc 'Work please'
   task :ensure do
     invoke 'deploy'
     invoke 'bundler:install'
