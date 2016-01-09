@@ -1,4 +1,7 @@
 require 'faker'
+User.create([
+  { email: 'admin@admin.com', password: 'rootroot', confirmed_at: Time.now}
+])
 
 Category.create([
     { id: 0, name: 'Ruby' },
