@@ -16,8 +16,6 @@
         %ul.nav.navbar-nav
           %li
             %a{href: '/'} Home
-          %li
-            %a{href: '/shop'} Shop
       .navbar-right
         %ul.nav.navbar-nav
           %li.cart
@@ -25,11 +23,11 @@
               = icon('shopping-cart')
               %strong Cart
               = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)")
-          %li.active
-            %a{href: "/settings"} Settings
-          %li
-            %a{href: "/orders"} Orders
           - if user_signed_in?
+            -# %li
+            -#   %a{href: "/orders"} Orders
+            %li.active
+              %a{href: edit_user_registration_path} Settings
             %li
               %a{href: destroy_user_session_path, data: {method: 'delete'}} Sign Out
           - else
