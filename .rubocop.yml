@@ -25,3 +25,6 @@ Lint/UselessAssignment:
 
 Style/MultilineBlockChain:
   Enabled: false
+
+Style/RescueModifier:
+  Enabled: false

@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     @billing_address = current_user.billing_address
     @delivery_address = current_user.delivery_address
-    super do
+    super
   end
 
   def destroy
@@ -24,7 +24,16 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update).push(billing_address: [:first_name, :last_name, :street_address, :city, :country, :zip, :phone])
+    devise_parameter_sanitizer.for(:account_update).push(
+      billing_address: [
+        :first_name,
+        :last_name,
+        :street_address,
+        :city,
+        :country,
+        :zip,
+        :phone
+      ])
   end
 
   def update_resource(resource, params)
