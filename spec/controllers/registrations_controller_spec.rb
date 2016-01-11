@@ -9,20 +9,6 @@ RSpec.describe RegistrationsController, type: :controller do
       .to receive(:devise_mapping).and_return(Devise.mappings[:user])
   end
 
-  describe '#edit' do
-    it 'sets @billing_address' do
-      sign_in create :user
-      get :edit
-      expect(assigns(:billing_address)).to be_kind_of(Address)
-    end
-
-    it 'sets @delivery_address' do
-      sign_in create :user
-      get :edit
-      expect(assigns(:delivery_address)).to be_kind_of(Address)
-    end
-  end
-
   describe '#destroy' do
     it 'redirects back when destroy not confirmed' do
       sign_in create :user

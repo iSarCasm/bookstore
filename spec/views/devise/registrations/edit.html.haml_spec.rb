@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "devise/registrations/edit", type: :view, verify_stubs: false do
   before do
+    allow(view).to receive(:current_user).and_return(User.new)
     allow(view).to receive(:resource).and_return(User.new)
     allow(view).to receive(:resource_name).and_return(:user)
     allow(view).to receive(:devise_mapping).and_return(Devise.mappings[:user])

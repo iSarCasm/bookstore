@@ -25,6 +25,16 @@ module DeviseHelper
                               :password_confirmation)
   end
 
+  def address_error_messages_of(model)
+    devise_error_messages_for(:"#{model}.first_name",
+                              :"#{model}.last_name",
+                              :"#{model}.street_address",
+                              :"#{model}.city",
+                              :"#{model}.country",
+                              :"#{model}.zip",
+                              :"#{model}.phone")
+  end
+
   def email_error_messages
     devise_error_messages_for(:email)
   end
@@ -40,13 +50,23 @@ module DeviseHelper
   end
 
   def name_of_field(field_key)
+    field_key = delete_model_from_key(field_key)
     {
       current_password: "New password",
-      password_confirmation: "Password Confirmation"
-    }.fetch(field_key, field_key.to_s.capitalize)
+      password_confirmation: "Password Confirmation",
+      first_name: "First Name",
+    }.fetch(field_key, default_sym_to_string_pattern(field_key))
+  end
+
+  def default_sym_to_string_pattern(sym)
+    sym.to_s.gsub('_', ' ').split.map(&:capitalize).join(' ')
   end
 
   def string_for_errors(error_array)
     error_array.map(&:to_s).join(';')
+  end
+
+  def delete_model_from_key(key)
+    key.to_s.split('.').last.to_sym
   end
 end

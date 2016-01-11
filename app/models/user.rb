@@ -7,11 +7,13 @@ class User < ActiveRecord::Base
   belongs_to :billing_address, class_name: "Address"
   belongs_to :delivery_address, class_name: "Address"
 
+  accepts_nested_attributes_for :billing_address, :delivery_address
+
   def billing_address
-    (super rescue nil) || Address.new
+    (super rescue nil) || self.build_billing_address
   end
 
   def delivery_address
-    (super rescue nil) || Address.new
+    (super rescue nil) || self.build_delivery_address
   end
 end

@@ -3,3 +3,5 @@ class Address < ActiveRecord::Base
             :city, :country, :zip, :phone,
             presence: true
 end
+
+class NullAddress < Address; end

@@ -1,18 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
 
-  def edit
-    @billing_address = current_user.billing_address
-    @delivery_address = current_user.delivery_address
-    super
-  end
-
-  def update
-    @billing_address = current_user.billing_address
-    @delivery_address = current_user.delivery_address
-    super
-  end
-
   def destroy
     if params[:confirm]
       super
@@ -24,17 +12,38 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update).push(
-      billing_address: [
-        :first_name,
-        :last_name,
-        :street_address,
-        :city,
-        :country,
-        :zip,
-        :phone
-      ])
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit({ billing_address_attributes:
+                [
+                  :id,
+                  :first_name,
+                  :last_name,
+                  :street_address,
+                  :city,
+                  :country,
+                  :zip,
+                  :phone
+                ]
+              },
+              { delivery_address_attributes:
+                [
+                  :first_name,
+                  :last_name,
+                  :street_address,
+                  :city,
+                  :country,
+                  :zip,
+                  :phone
+                ]
+              },
+              :email,
+              :password,
+              :password_confirmation,
+              :current_password)
+    end
   end
+
+  private
 
   def update_resource(resource, params)
     if params.include? "password"
