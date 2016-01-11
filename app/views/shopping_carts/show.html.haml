@@ -1,0 +1,5 @@
+= number_to_currency current_cart.sum
+- current_cart.items.each do |item|
+  = item.book.title
+  = item.sum
+  = item.quantity

@@ -43,6 +43,10 @@ module DeviseHelper
     resource.errors.any?
   end
 
+  def devise_error_messages!
+    resource.errors.messages
+  end
+
   protected
 
   def devise_error_messages

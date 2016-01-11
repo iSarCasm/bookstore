@@ -8,11 +8,12 @@ class ShoppingCart
     restore(session[SESSION_KEY])
   end
 
-  def add(book_id)
-    if present?(book_id)
-      find(book_id).increase
+  def add(book)
+    book = accept_book_model(book)
+    if present?(book)
+      find(book).increase
     else
-      @items << CartItem.new(book_id)
+      @items << CartItem.new(book)
     end
     save
   end
@@ -21,7 +22,15 @@ class ShoppingCart
     @items.inject(0) { |size, item| size + item.quantity }
   end
 
+  def sum
+    @items.inject(0) { |sum, item| sum + item.sum }
+  end
+
   private
+
+  def accept_book_model(model)
+    model.is_a?(Book) ? model.id : model
+  end
 
   def restore(hash)
     return unless @@session[SESSION_KEY]

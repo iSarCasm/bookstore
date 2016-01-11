@@ -8,6 +8,8 @@ require 'rspec/rails'
 require 'kaminari_rspec'
 require_relative 'matchers/currency_validator'
 
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
 ActiveRecord::Migration.maintain_test_schema!
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

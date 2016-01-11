@@ -8,6 +8,16 @@ RSpec.describe ShoppingCart do
   end
 
   describe '#add' do
+    it 'accepts book.id' do
+      cart = ShoppingCart.new
+      expect{cart.add(0)}.to change{cart.items.size}
+    end
+
+    it 'accepts book model' do
+      cart = ShoppingCart.new
+      expect{cart.add(create(:book))}.to change{cart.items.size}
+    end
+
     context 'when no items with this id' do
       it 'adds new CartItem' do
         cart = ShoppingCart.new
@@ -29,9 +39,22 @@ RSpec.describe ShoppingCart do
   describe '#size' do
     it 'returns total number of items in cart' do
       cart = ShoppingCart.new
-      3.times { cart.add(0) }
-      2.times { cart.add(1) }
+      book_1 = create(:book)
+      book_2 = create(:book)
+      3.times { cart.add(book_1) }
+      2.times { cart.add(book_2) }
       expect(cart.size).to eq 5
+    end
+  end
+
+  describe '#sum' do
+    it 'returns total price of all items' do
+      cart = ShoppingCart.new
+      book_1 = create(:book, price: 10)
+      book_2 = create(:book, price: 4)
+      3.times { cart.add book_1 }
+      2.times { cart.add book_2 }
+      expect(cart.sum).to eq 38
     end
   end
 end

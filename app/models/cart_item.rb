@@ -1,9 +1,18 @@
 class CartItem
-  attr_reader :id, :quantity
+  attr_reader :id
+  attr_accessor :quantity
 
   def initialize(item_id, quantity = 1)
     @id = item_id
     @quantity = quantity
+  end
+
+  def book
+    Book.find(@id)
+  end
+
+  def sum
+    book.price * @quantity
   end
 
   # Restoring from Cookies

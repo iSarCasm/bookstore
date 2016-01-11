@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ShoppingCartsController, type: :controller do
+  describe '#show' do
+    it 'successfully responses' do
+      get :show
+      expect(response.status).to eq 200
+    end
+  end
+
   describe "#update" do
     before { request.env["HTTP_REFERER"] = index_url }
 
@@ -11,7 +18,7 @@ RSpec.describe ShoppingCartsController, type: :controller do
 
     context 'when trying to add valid item' do
       it 'adds item to cart' do
-        book = create(:book, id: 0)
+        book = create(:book)
         expect{patch :update, book: book}.to change{controller.current_cart.items}
       end
     end

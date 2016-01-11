@@ -18,10 +18,27 @@ RSpec.describe CartItem do
     end
   end
 
+  describe '#book' do
+    it 'returns book object of current @id' do
+      book = create(:book)
+      item = CartItem.new(book.id)
+      expect(item.book).to eq book
+    end
+  end
+
+  describe '#sum' do
+    it 'returns total price of item' do
+      book = create(:book, price: 10.00)
+      item = CartItem.new(book.id)
+      2.times { item.increase }
+      expect(item.sum).to eq 30
+    end
+  end
+
   describe '#increase' do
     it 'increases @quantity by 1' do
-      cart = CartItem.new(0)
-      expect{cart.increase}.to change{cart.quantity}.by(1)
+      item = CartItem.new(0)
+      expect{item.increase}.to change{item.quantity}.by(1)
     end
   end
 end
