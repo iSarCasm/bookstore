@@ -19,3 +19,9 @@ Style/SingleLineBlockParams:
 
 Style/ClassVars:
   Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false

@@ -5,8 +5,6 @@ if Rails.env.production?
 end
 require 'spec_helper'
 require 'rspec/rails'
-require 'capybara/rspec'
-require 'database_cleaner'
 require 'kaminari_rspec'
 require_relative 'matchers/currency_validator'
 

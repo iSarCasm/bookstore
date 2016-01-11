@@ -22,7 +22,7 @@
             %a{href: "/cart"}
               = icon('shopping-cart')
               %strong Cart
-              = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)")
+              = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)") # wtf
           - if user_signed_in?
             -# %li
             -#   %a{href: "/orders"} Orders

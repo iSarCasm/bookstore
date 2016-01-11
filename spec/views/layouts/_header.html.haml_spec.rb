@@ -43,13 +43,13 @@ RSpec.describe "layouts/_header", type: :view, verify_stubs: false do
       it 'shows "Settings" link' do
         sign_in create(:user)
         render
-        expect(rendered).to have_link 'Settings'
+        expect(rendered).to have_link nil, href: edit_user_registration_path
       end
 
       it "shows 'sign out' link" do
         sign_in create(:user)
         render
-        expect(rendered).to have_link 'Sign Out'
+        expect(rendered).to have_link nil, href: destroy_user_session_path
       end
     end
   end
