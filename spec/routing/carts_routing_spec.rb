@@ -8,8 +8,8 @@ RSpec.describe 'routes for Carts', type: :routing do
     )
   end
 
-  it "routes patch '/add-to-cart' to Carts controller" do
-    expect(patch('/shopping_carts')).to route_to(
+  it "routes patch '/cart' to Carts controller" do
+    expect(patch('/cart')).to route_to(
       controller: 'shopping_carts',
       action: 'update'
     )
