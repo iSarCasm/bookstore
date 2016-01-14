@@ -19,7 +19,14 @@ RSpec.describe ShoppingCartsController, type: :controller do
     context 'when trying to add valid item' do
       it 'adds item to cart' do
         book = create(:book)
-        expect{patch :update, book: book}.to change{controller.current_cart.items}
+        expect(controller.current_cart).to receive(:add)
+        patch :update, book: book
+      end
+
+      it 'adds coupon to cart' do
+        coupon = create(:coupon)
+        expect(controller.current_cart).to receive(:apply_coupon)
+        patch :update, coupon: coupon
       end
     end
   end

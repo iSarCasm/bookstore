@@ -18,12 +18,33 @@ class ShoppingCart
     save
   end
 
+  def apply_coupon(coupon)
+    @coupon = accept_coupon_model(coupon)
+    save
+  end
+
+  def sum_without_discount
+    @items.inject(0) { |sum, item| sum + item.sum }
+  end
+
+  def sum
+    sum_without_discount * (1 - discount)
+  end
+
+  def coupon
+    Coupon.find_by(name: @coupon)
+  end
+
   def size
     @items.inject(0) { |size, item| size + item.quantity }
   end
 
-  def sum
-    @items.inject(0) { |sum, item| sum + item.sum }
+  def discount_string
+    "-#{(coupon.discount*100).to_i}%" if coupon
+  end
+
+  def discount
+    coupon&.discount || 0
   end
 
   private
@@ -32,11 +53,16 @@ class ShoppingCart
     model.is_a?(Book) ? model.id : model
   end
 
+  def accept_coupon_model(model)
+    model.is_a?(Coupon) ? model.name : model
+  end
+
   def restore(hash)
     return unless @@session[SESSION_KEY]
     hash["items"].each do |item|
       @items << CartItem.restore(item)
     end
+    @coupon = hash["coupon"]
   end
 
   def save
