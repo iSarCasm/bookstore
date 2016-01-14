@@ -1,5 +1,22 @@
-= number_to_currency current_cart.sum
-- current_cart.items.each do |item|
-  = item.book.title
-  = item.sum
-  = item.quantity
+.container
+  .row
+    .col-xs-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Book
+            %th Price
+            %th Qty
+            %th Total
+        %tbody
+          - current_cart.items.each do |item|
+            %tr
+              %td= item.book.title
+              %td= number_to_currency item.price
+              %td= item.quantity
+              %td= number_to_currency item.sum
+          %tr.warning
+            %td SUBTOTAL
+            %td
+            %td
+            %td= number_to_currency current_cart.sum

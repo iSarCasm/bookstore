@@ -35,6 +35,23 @@ RSpec.describe CartItem do
     end
   end
 
+  describe '#price' do
+    it 'return signle item price' do
+      book = create(:book, price: 10.00)
+      item = CartItem.new(book.id)
+      2.times { item.increase }
+      expect(item.price).to eq 10
+    end
+  end
+
+  describe '#title' do
+    it 'return signle item price' do
+      book = create(:book, title: 'lel')
+      item = CartItem.new(book.id)
+      expect(item.title).to eq 'lel'
+    end
+  end
+
   describe '#increase' do
     it 'increases @quantity by 1' do
       item = CartItem.new(0)

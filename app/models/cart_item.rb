@@ -7,6 +7,11 @@ class CartItem
     @quantity = quantity
   end
 
+  # Restoring from Cookies
+  def self.restore(hash)
+    CartItem.new(hash["id"], hash["quantity"])
+  end
+
   def book
     Book.find(@id)
   end
@@ -15,9 +20,12 @@ class CartItem
     book.price * @quantity
   end
 
-  # Restoring from Cookies
-  def self.restore(hash)
-    CartItem.new(hash["id"], hash["quantity"])
+  def price
+    book.price
+  end
+
+  def title
+    book.title
   end
 
   def increase
