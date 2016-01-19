@@ -1,7 +1,7 @@
 # Bookstore with Ruby on Rails
 [![Build Status](https://travis-ci.org/iSarCasm/bookstore.svg?branch=master)](https://travis-ci.org/iSarCasm/bookstore)
 
-# Agile TODO list
+# TODO list
 ## 0. Setup the environment
 - Init git repo (use SSL)
 - .ruby-version & .ruby-gemset
@@ -19,14 +19,14 @@
   * nginx + Unicorn
   * Capistrano
 
-## 1 Sprint
+## 1
 - Visitors can preview books divided into categories
 - Books have an Author, Title, Images, Description, Price, Quantity
 - Author has Name, Books, Born-date, Country, Description
 - Categories have Name, Books
 - Page pagination with Kaminari
 
-## 2 Sprint
+## 2
 - Shopping cart
 - User registration and authorization
 - User has Email, Password, FullName, Billing Address, Delivery Address, Orders
@@ -34,11 +34,11 @@
 - Orders
 - Coupons
 
-## 3 Sprint
+## 3
 - I18n
 - RailsAdmin
 
-## 4 Sprint
+## 4
 - Leaving Reviews
 - Bestsellers
 - Mailer
@@ -46,15 +46,15 @@
 - Facebook auth
 - Password Reset
 
-## 5 Sprint
+## 5
 - Git, Twitter and VK auth
 - Book sort
 - Metrics
 
-## 6 Sprint
+## 6
 - Benchmarking
 - Security
 
-## 7 Sprint
+## 7
 - Live Help
 - Book API (related books)
