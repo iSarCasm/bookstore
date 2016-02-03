@@ -15,12 +15,10 @@ class ShoppingCart
     else
       @items << CartItem.new(book)
     end
-    save
   end
 
   def apply_coupon(coupon)
     @coupon = accept_coupon_model(coupon)
-    save
   end
 
   def sum_without_discount
@@ -47,6 +45,10 @@ class ShoppingCart
     coupon&.discount || 0
   end
 
+  def save
+    @@session[SESSION_KEY] = self
+  end
+
   private
 
   def accept_book_model(model)
@@ -63,10 +65,6 @@ class ShoppingCart
       @items << CartItem.restore(item)
     end
     @coupon = hash["coupon"]
-  end
-
-  def save
-    @@session[SESSION_KEY] = self
   end
 
   def present?(book_id)

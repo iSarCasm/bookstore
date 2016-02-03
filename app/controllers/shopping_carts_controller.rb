@@ -3,8 +3,16 @@ class ShoppingCartsController < ApplicationController
   end
 
   def update
-    current_cart.add(params[:book])             if params[:book]
-    current_cart.apply_coupon(params[:coupon])  if params[:coupon]
+    if params[:book]
+      current_cart.add(params[:book])
+      current_cart.save
+    end
+
+    if params[:coupon]
+      current_cart.apply_coupon(params[:coupon])
+      current_cart.save
+    end
+
     respond_to do |format|
       format.js {}
       format.html { redirect_to :back }
