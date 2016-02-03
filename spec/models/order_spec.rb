@@ -13,6 +13,8 @@ RSpec.describe Order, type: :model do
   it { should validate_presence_of :user }
   it { should validate_presence_of :shipment }
 
+  it { should have_many :order_items }
+
   it { should belong_to(:billing_address).class_name('Address') }
   it { should belong_to(:shipment_address).class_name('Address') }
   it { should belong_to :user }

@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   include AASM
 
+  has_many :order_items
+
   belongs_to :billing_address, class_name: "Address"
   belongs_to :shipment_address, class_name: "Address"
   belongs_to :user
