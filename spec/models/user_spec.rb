@@ -18,4 +18,6 @@ RSpec.describe User, type: :model do
 
   it { should belong_to(:billing_address).class_name('Address') }
   it { should belong_to(:delivery_address).class_name('Address') }
+  it { should have_many(:payments).class_name('PaymentInfo') }
+  it { should have_many(:orders) }
 end

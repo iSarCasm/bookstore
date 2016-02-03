@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   belongs_to :billing_address, class_name: "Address"
   belongs_to :delivery_address, class_name: "Address"
 
+  has_many :payments, class_name: "PaymentInfo"
+  has_many :orders
+
   accepts_nested_attributes_for :billing_address, :delivery_address
 
   def billing_address

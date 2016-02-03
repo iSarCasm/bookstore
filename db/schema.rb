@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114133757) do
+ActiveRecord::Schema.define(version: 20160203143424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,32 @@ ActiveRecord::Schema.define(version: 20160114133757) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "payment_id"
+    t.integer  "billing_address_id"
+    t.integer  "shipment_address_id"
+    t.integer  "user_id"
+    t.string   "shipment"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "orders", ["billing_address_id"], name: "index_orders_on_billing_address_id", using: :btree
+  add_index "orders", ["shipment_address_id"], name: "index_orders_on_shipment_address_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "payment_infos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "card"
+    t.integer  "expiration_year"
+    t.integer  "expiration_month"
+    t.integer  "cvv"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "payment_infos", ["user_id"], name: "index_payment_infos_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -101,4 +127,6 @@ ActiveRecord::Schema.define(version: 20160114133757) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "orders", "users"
+  add_foreign_key "payment_infos", "users"
 end
