@@ -3,11 +3,18 @@ class Order < ActiveRecord::Base
 
   has_many :order_items
 
+  belongs_to :user, dependent: :destroy
   belongs_to :billing_address, class_name: "Address"
   belongs_to :shipment_address, class_name: "Address"
-  belongs_to :user
   belongs_to :payment, class_name: "PaymentInfo"
   belongs_to :shipment
+
+  before_destroy do |order|
+    order.billing_address.destroy
+    order.shipment_address.destroy
+  end
+
+  validates_associated :billing_address, :shipment_address, :payment, :shipment
 
   validates :user, presence: true
   validates :billing_address, presence: true
