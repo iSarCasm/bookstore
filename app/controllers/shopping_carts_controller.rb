@@ -18,4 +18,9 @@ class ShoppingCartsController < ApplicationController
       format.html { redirect_to :back }
     end
   end
+
+  def checkout
+    Order.create_from_cart(cart: current_cart, user: current_user)
+    render nothing: true
+  end
 end

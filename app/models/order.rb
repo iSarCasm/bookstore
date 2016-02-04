@@ -12,8 +12,9 @@ class Order < ActiveRecord::Base
   validates :user, presence: true
   validates :billing_address, presence: true
   validates :shipment_address, presence: true
-  validates :payment, presence: true
   validates :shipment, presence: true
+
+  DEFAULT_SHIPMENT_ID = 1
 
   aasm do
     state :in_progress, initilial: true
@@ -37,5 +38,32 @@ class Order < ActiveRecord::Base
     event :cancel do
       transitions to: :canceled
     end
+  end
+
+  def self.create_from_cart(cart: nil, user: nil)
+    order = user.orders.build
+    order.add_order_items(cart)
+    order.create_order_billing_address
+    order.create_order_shipment_address
+    order.set_default_shipment
+    order.save!
+  end
+
+  def add_order_items(cart)
+    cart.items.each do |item|
+      self.order_items.build(book_id: item.id, quantity: item.quantity)
+    end
+  end
+
+  def create_order_billing_address
+    self.billing_address = self.user.billing_address.clone
+  end
+
+  def create_order_shipment_address
+    self.shipment_address = self.user.delivery_address.clone
+  end
+
+  def set_default_shipment
+    self.shipment = Shipment.find(DEFAULT_SHIPMENT_ID)
   end
 end

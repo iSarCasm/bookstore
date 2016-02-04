@@ -14,4 +14,11 @@ RSpec.describe 'routes for Carts', type: :routing do
       action: 'update'
     )
   end
+
+  it "routes post '/cart' to Carts controller" do
+    expect(post('/cart')).to route_to(
+      controller: 'shopping_carts',
+      action: 'checkout'
+    )
+  end
 end
