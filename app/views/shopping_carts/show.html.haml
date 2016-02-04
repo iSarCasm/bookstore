@@ -20,16 +20,12 @@
               %strong SUBTOTAL
             %td
               %strong= current_cart.discount_string
-            - if current_cart.discount_string
-              %td
+            %td
+              - if current_cart.discount_string
                 %strong
                   %s= number_to_currency current_cart.sum_without_discount
-              %td
-                %strong= number_to_currency current_cart.sum
-            -else
-              %td
-              %td
-                %strong= number_to_currency current_cart.sum
+            %td
+              %strong= number_to_currency current_cart.sum
   .row
     .col-xs-12
       .pull-left

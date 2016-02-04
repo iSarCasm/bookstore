@@ -2058,6 +2058,15 @@
         null,
         null
       ],
+      "/home/sarcasm/study/bookstore/spec/factories/order_item.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
       "/home/sarcasm/study/bookstore/spec/factories/payment_info.rb": [
         1,
         1,
@@ -2099,6 +2108,6 @@
         null
       ]
     },
-    "timestamp": 1454521892
+    "timestamp": 1454522677
   }
 }

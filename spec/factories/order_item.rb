@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :order do
+  factory :order_item do
     order
     book
     quantity { Random.new.rand(1..9) }
