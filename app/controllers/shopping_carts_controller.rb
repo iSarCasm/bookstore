@@ -21,6 +21,6 @@ class ShoppingCartsController < ApplicationController
 
   def checkout
     order = Order.create_from_cart(cart: current_cart, user: current_user)
-    redirect_to edit_address_path(order.id)
+    redirect_to edit_address_path(order)
   end
 end

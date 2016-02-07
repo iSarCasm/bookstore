@@ -6,15 +6,22 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   belongs_to :user, dependent: :destroy
-  belongs_to :billing_address, class_name: "Address"
-  belongs_to :shipment_address, class_name: "Address"
-  belongs_to :payment, class_name: "PaymentInfo"
+  belongs_to :billing_address, class_name: "Address",   autosave: true
+  belongs_to :shipment_address, class_name: "Address",  autosave: true
+  belongs_to :payment, class_name: "PaymentInfo",       autosave: true
   belongs_to :shipment
 
   before_destroy do |order|
     order.billing_address.destroy
     order.shipment_address.destroy
   end
+
+  before_save do |order|
+    order.billing_address.save
+    order.shipment_address.save
+  end
+
+  accepts_nested_attributes_for :billing_address, :shipment_address
 
   validates :user, presence: true
 
@@ -76,5 +83,13 @@ class Order < ActiveRecord::Base
 
   def set_default_shipment
     self.shipment = Shipment.find(DEFAULT_SHIPMENT_ID)
+  end
+
+  def billing_address
+    (super rescue nil) || build_billing_address
+  end
+
+  def shipment_address
+    (super rescue nil) || build_shipment_address
   end
 end

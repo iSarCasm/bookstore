@@ -40,4 +40,12 @@ RSpec.describe 'routes for Orders', type: :routing do
       id: ':id'
     )
   end
+
+  it "routes patch '/orders/:id' to Orders#update" do
+    expect(patch('/orders/:id')).to route_to(
+      controller: 'orders',
+      action: 'update',
+      id: ':id'
+    )
+  end
 end

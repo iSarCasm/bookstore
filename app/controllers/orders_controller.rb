@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   def edit_address
     @order = Order.find(params[:id])
     check_user_for!(@order)
@@ -27,7 +28,9 @@ class OrdersController < ApplicationController
   def update
     order = Order.find(params[:id])
     check_user_for!(order)
-    order.update!(order_params)
+    order.update(order_params)
+    flash[:errors] = order.errors.messages
+    redirect_to :back
   end
 
   private
@@ -40,7 +43,7 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(
-        billing_address: [
+        billing_address_attributes: [
           :id,
           :first_name,
           :last_name,
@@ -50,7 +53,7 @@ class OrdersController < ApplicationController
           :zip,
           :phone
         ],
-        shipment_address: [
+        shipment_address_attributes: [
           :id,
           :first_name,
           :last_name,

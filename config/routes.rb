@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get   'orders/:id/edit_payment',  to: 'orders#edit_payment',   as: :edit_payment
   get   'orders/:id/confirm',       to: 'orders#confirm',        as: :confirm
   get   'orders/:id/complete',      to: 'orders#complete',       as: :complete
+  patch 'orders/:id',               to: 'orders#update',         as: :order
 end

@@ -10,6 +10,9 @@
       .col-sm-6.col-sm-pull-6
         = form_for(current_user.billing_address, as: "user[billing_address_attributes]", url: registration_path(resource_name), html: { method: :put }) do |f|
           = render 'address/edit', f: f
+          .actions
+            = f.submit 'Save', class: ['btn', 'btn-default']
+
     .col-sm-6
       %h3 Delivery Address
       .col-sm-6.col-sm-push-6
@@ -17,6 +20,9 @@
       .col-sm-6.col-sm-pull-6
         = form_for(current_user.delivery_address, as: "user[delivery_address_attributes]", url: registration_path(resource_name), html: { method: :put }) do |f|
           = render 'address/edit', f: f
+          .actions
+            = f.submit 'Save', class: ['btn', 'btn-default']
+
   .row
     .col-sm-6
       %h3 Email
