@@ -21,9 +21,8 @@
             %td
               %strong= current_cart.discount_string
             %td
-              - if current_cart.discount_string
-                %strong
-                  %s= number_to_currency current_cart.sum_without_discount
+              %strong
+                %s= price_without_discount_if_any
             %td
               %strong= number_to_currency current_cart.sum
   .row

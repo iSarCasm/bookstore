@@ -7,10 +7,7 @@ RSpec.describe Order, type: :model do
   it { should have_db_column :user_id }
   it { should have_db_column :shipment_id }
 
-  it { should validate_presence_of :billing_address }
-  it { should validate_presence_of :shipment_address }
   it { should validate_presence_of :user }
-  it { should validate_presence_of :shipment }
 
   it { should have_many :order_items }
 

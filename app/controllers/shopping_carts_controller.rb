@@ -20,7 +20,7 @@ class ShoppingCartsController < ApplicationController
   end
 
   def checkout
-    Order.create_from_cart(cart: current_cart, user: current_user)
-    render nothing: true
+    order = Order.create_from_cart(cart: current_cart, user: current_user)
+    redirect_to edit_address_path(order.id)
   end
 end

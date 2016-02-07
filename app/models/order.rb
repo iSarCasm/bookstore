@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   include AASM
 
+  DEFAULT_SHIPMENT_ID = 1
+
   has_many :order_items
 
   belongs_to :user, dependent: :destroy
@@ -14,14 +16,15 @@ class Order < ActiveRecord::Base
     order.shipment_address.destroy
   end
 
-  validates_associated :billing_address, :shipment_address, :payment, :shipment
-
   validates :user, presence: true
-  validates :billing_address, presence: true
-  validates :shipment_address, presence: true
-  validates :shipment, presence: true
 
-  DEFAULT_SHIPMENT_ID = 1
+  validates :billing_address, presence: true,   if: "self.in_queue?"
+  validates :shipment_address, presence: true,  if: "self.in_queue?"
+  validates :shipment, presence: true,          if: "self.in_queue?"
+  validates :payment, presence: true,           if: "self.in_queue?"
+  validates_associated :billing_address, :shipment_address, :payment, :shipment,
+      if: "self.in_queue?"
+
 
   aasm do
     state :in_progress, initilial: true
@@ -54,6 +57,7 @@ class Order < ActiveRecord::Base
     order.create_order_shipment_address
     order.set_default_shipment
     order.save!
+    order
   end
 
   def add_order_items(cart)

@@ -4,6 +4,6 @@ FactoryGirl.define do
     association :payment,           factory: :payment_info
     association :billing_address,   factory: :address
     association :shipment_address,  factory: :address
-    shipment            { ["LOL"].sample }
+    shipment
   end
 end
