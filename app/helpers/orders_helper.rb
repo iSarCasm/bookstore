@@ -20,6 +20,20 @@ module OrdersHelper
                         "#{model}.phone")
   end
 
+  def payment_error_messages_of(errors, model)
+    error_messages_for(errors,
+                        "#{model}.card",
+                        "#{model}.expiration_year",
+                        "#{model}.expiration_month",
+                        "#{model}.cvv")
+  end
+
+  def safe_card_number(card)
+    card.split("").map.with_index do |c, i|
+      ( i < 12 ? '*' : c)
+    end.join("")
+  end
+
   protected
 
   def name_of_field(field_key)

@@ -6,7 +6,7 @@
     .col-sm-6
       %h3 Billing Address
       .col-sm-6.col-sm-push-6
-        = html_for_errors address_error_messages_of(:billing_address)
+        = html_for_errors devise_address_error_messages_of(:billing_address)
       .col-sm-6.col-sm-pull-6
         = form_for(current_user.billing_address, as: "user[billing_address_attributes]", url: registration_path(resource_name), html: { method: :put }) do |f|
           = render 'address/edit', f: f
@@ -16,7 +16,7 @@
     .col-sm-6
       %h3 Delivery Address
       .col-sm-6.col-sm-push-6
-        = html_for_errors address_error_messages_of(:delivery_address)
+        = html_for_errors devise_address_error_messages_of(:delivery_address)
       .col-sm-6.col-sm-pull-6
         = form_for(current_user.delivery_address, as: "user[delivery_address_attributes]", url: registration_path(resource_name), html: { method: :put }) do |f|
           = render 'address/edit', f: f

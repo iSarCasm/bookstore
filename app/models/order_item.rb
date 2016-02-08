@@ -7,4 +7,12 @@ class OrderItem < ActiveRecord::Base
   validates :quantity, presence: true, numericality: {
     greater_than_or_equal_to: 0
   }
+
+  def price
+    book.price
+  end
+
+  def sum
+    price * quantity
+  end
 end

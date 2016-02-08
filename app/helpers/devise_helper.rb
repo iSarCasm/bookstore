@@ -25,7 +25,7 @@ module DeviseHelper
                               :password_confirmation)
   end
 
-  def address_error_messages_of(model)
+  def devise_address_error_messages_of(model)
     devise_error_messages_for(:"#{model}.first_name",
                               :"#{model}.last_name",
                               :"#{model}.street_address",

@@ -17,6 +17,10 @@ class ShoppingCart
     end
   end
 
+  def clear
+    @items = []
+  end
+
   def apply_coupon(coupon)
     @coupon = accept_coupon_model(coupon)
   end

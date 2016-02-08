@@ -48,4 +48,12 @@ RSpec.describe 'routes for Orders', type: :routing do
       id: ':id'
     )
   end
+
+  it "routes post '/orders/:id/place' to Orders#place" do
+    expect(post('/orders/:id/place')).to route_to(
+      controller: 'orders',
+      action: 'place',
+      id: ':id'
+    )
+  end
 end

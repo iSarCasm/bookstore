@@ -1,0 +1,25 @@
+.container
+  %h2
+    Checkout
+  = render 'orders/order_editing_step', step: :payment
+  .row
+    =form_for @order do |order|
+      .col-sm-6.col-sm-push-6
+        = html_for_errors payment_error_messages_of(flash[:errors], :payment)
+      .col-sm-6.col-sm-pull-6
+        = order.fields_for :payment do |f|
+          .field.form-group
+            = f.label :card
+            = f.text_field :card, class: 'form-control'
+          .field.form-group
+            = f.label :expiration_year
+            = f.text_field :expiration_year, class: 'form-control'
+          .field.form-group
+            = f.label :expiration_month
+            = f.text_field :expiration_month, class: 'form-control'
+          .field.form-group
+            = f.label :cvv
+            = f.text_field :cvv, class: 'form-control'
+      =order.hidden_field :step, value: :payment
+      .actions
+        = order.submit 'Save and Continue', class: ['btn', 'btn-default']

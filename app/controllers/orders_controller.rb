@@ -1,39 +1,45 @@
 class OrdersController < ApplicationController
+  before_filter :get_order_for_edit
 
   def edit_address
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
   end
 
   def edit_delivery
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
+    @available_shipments = Shipment.all.to_a
   end
 
   def edit_payment
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
   end
 
   def confirm
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
   end
 
   def complete
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
   end
 
   def update
-    order = Order.find(params[:id])
-    check_user_for!(order)
-    order.update(order_params)
-    flash[:errors] = order.errors.messages
-    redirect_to :back
+    @order.update(order_params)
+    flash[:errors] = @order.errors.messages
+    if @order.errors.empty?
+      go_to_next_step
+    else
+      redirect_to :back
+    end
+  end
+
+  def place
+    @order.enqueue
+    @order.save
+    redirect_to index_path
   end
 
   private
+
+  def get_order_for_edit
+    @order = Order.find(params[:id])
+    check_user_for!(@order)
+    fail 'You cant edit this one' unless @order.in_progress?
+  end
 
     def check_user_for!(order)
       if (current_user != order.user)
@@ -43,6 +49,7 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(
+        :shipment_id,
         billing_address_attributes: [
           :id,
           :first_name,
@@ -63,15 +70,23 @@ class OrdersController < ApplicationController
           :zip,
           :phone
         ],
-        shipment: [
-          :id
-        ],
-        payment: [
+        payment_attributes: [
           :card,
           :expiration_year,
           :expiration_month,
           :cvv
         ]
       )
+    end
+
+    def go_to_next_step
+      case params[:order][:step]
+      when 'address'
+        redirect_to edit_delivery_path(@order)
+      when 'shipment'
+        redirect_to edit_payment_path(@order)
+      when 'payment'
+        redirect_to confirm_path(@order)
+      end
     end
 end

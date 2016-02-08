@@ -6,10 +6,11 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   belongs_to :user, dependent: :destroy
-  belongs_to :billing_address, class_name: "Address",   autosave: true
-  belongs_to :shipment_address, class_name: "Address",  autosave: true
-  belongs_to :payment, class_name: "PaymentInfo",       autosave: true
+  belongs_to :billing_address, class_name: "Address"
+  belongs_to :shipment_address, class_name: "Address"
+  belongs_to :payment, class_name: "PaymentInfo"
   belongs_to :shipment
+  belongs_to :coupon
 
   before_destroy do |order|
     order.billing_address.destroy
@@ -21,7 +22,7 @@ class Order < ActiveRecord::Base
     order.shipment_address.save
   end
 
-  accepts_nested_attributes_for :billing_address, :shipment_address
+  accepts_nested_attributes_for :billing_address, :shipment_address, :payment
 
   validates :user, presence: true
 
@@ -29,8 +30,7 @@ class Order < ActiveRecord::Base
   validates :shipment_address, presence: true,  if: "self.in_queue?"
   validates :shipment, presence: true,          if: "self.in_queue?"
   validates :payment, presence: true,           if: "self.in_queue?"
-  validates_associated :billing_address, :shipment_address, :payment, :shipment,
-      if: "self.in_queue?"
+  validates_associated :billing_address, :shipment_address, :payment, :shipment, if: "self.in_queue?"
 
 
   aasm do
@@ -63,6 +63,7 @@ class Order < ActiveRecord::Base
     order.create_order_billing_address
     order.create_order_shipment_address
     order.set_default_shipment
+    order.copy_coupon(cart)
     order.save!
     order
   end
@@ -74,15 +75,19 @@ class Order < ActiveRecord::Base
   end
 
   def create_order_billing_address
-    self.billing_address = self.user.billing_address.clone
+    billing_address = user.billing_address.clone if user.billing_address.valid?
   end
 
   def create_order_shipment_address
-    self.shipment_address = self.user.delivery_address.clone
+    shipment_address = user.delivery_address.clone if user.delivery_address.valid?
   end
 
   def set_default_shipment
     self.shipment = Shipment.find(DEFAULT_SHIPMENT_ID)
+  end
+
+  def copy_coupon(cart)
+    coupon = cart.coupon
   end
 
   def billing_address
@@ -91,5 +96,25 @@ class Order < ActiveRecord::Base
 
   def shipment_address
     (super rescue nil) || build_shipment_address
+  end
+
+  def payment
+    (super rescue nil) || build_payment(user: self.user)
+  end
+
+  def sum_without_discount
+    order_items.inject(0) { |sum, item| sum + item.sum }
+  end
+
+  def sum
+    sum_without_discount * (1 - discount)
+  end
+
+  def discount_string
+    "-#{(coupon.discount*100).to_i}%" if coupon
+  end
+
+  def discount
+    coupon&.discount || 0
   end
 end

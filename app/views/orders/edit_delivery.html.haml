@@ -1,0 +1,13 @@
+.container
+  %h2
+    Checkout
+  = render 'orders/order_editing_step', step: :shipment
+  .row.col-md-12
+    = form_for @order do |order|
+      - @available_shipments.each do |shipment|
+        .field.form-group
+          =order.radio_button 'shipment_id', shipment.id, checked: (@order.shipment_id == shipment.id)
+          =label "shipment_id_#{shipment.id}", "#{shipment.name} +$#{shipment.cost}"
+      =order.hidden_field :step, value: :shipment
+      .actions
+        = order.submit 'Save and Continue', class: ['btn', 'btn-default']
