@@ -34,7 +34,11 @@ RSpec.describe "layouts/_header", type: :view, verify_stubs: false do
     end
 
     context 'when user signed in' do
-      it "shows 'Oreders' link"
+      it "shows 'Orders' link" do
+        sign_in create(:user)
+        render
+        expect(rendered).to have_link nil, href: orders_path
+      end
 
       it 'shows "Settings" link' do
         sign_in create(:user)

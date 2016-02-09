@@ -1,0 +1,56 @@
+.container
+  %h2
+    = "Order #{@order.id}"
+  .row
+    .col-md-3
+      %h3.title
+        Shipment Address
+      %p= "#{@order.shipment_address.first_name} #{@order.shipment_address.last_name}"
+      %p= "#{@order.shipment_address.city} #{@order.shipment_address.country}"
+      %p= "#{@order.shipment_address.street_address}"
+      %p= "#{@order.shipment_address.zip}"
+      %p= "#{@order.shipment_address.phone}"
+    .col-md-3
+      %h3.title
+        Billing Address
+      %p= "#{@order.billing_address.first_name} #{@order.billing_address.last_name}"
+      %p= "#{@order.billing_address.city} #{@order.billing_address.country}"
+      %p= "#{@order.billing_address.street_address}"
+      %p= "#{@order.billing_address.zip}"
+      %p= "#{@order.billing_address.phone}"
+    .col-md-3
+      %h3.title
+        Shipment
+      %p= "#{@order.shipment.name}"
+    .col-md-3
+      %h3.title
+        Payment Information
+      %p= safe_card_number "#{@order.payment.card}"
+      %p= "#{@order.payment.expiration_year} / #{@order.payment.expiration_month}"
+  .row.col-xs-12
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Book
+          %th Price
+          %th Qty
+          %th Total
+      %tbody
+        - @order.order_items.each do |item|
+          %tr
+            %td= item.book.title
+            %td= number_to_currency item.price
+            %td= item.quantity
+            %td= number_to_currency item.sum
+        %tr.warning
+          %td
+            %strong SUBTOTAL
+          %td
+            %strong= @order.discount_string
+          %td
+            %strong
+              %s= price_without_discount_if_any(@order)
+          %td
+            %strong= number_to_currency @order.sum
+  .row.col-xs-12
+    =link_to "BACK TO STORE", index_path, class: ['btn', 'btn-primary']

@@ -35,9 +35,9 @@ RSpec.describe Order, type: :model do
     it "makes a copy of user's billing_address" do
       order = Order.new
       order.user = build(:user)
-      binding.pry
+
       order.create_order_billing_address
-      binding.pry
+
       expect(order.billing_address.street_address)
         .to eq order.user.billing_address.street_address
     end

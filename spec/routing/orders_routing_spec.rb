@@ -9,7 +9,7 @@ RSpec.describe 'routes for Orders', type: :routing do
     )
   end
 
-  it "routes get '/orders/:id/edit_delivery' to Orders#edit_address" do
+  it "routes get '/orders/:id/edit_delivery' to Orders#edit_delivery" do
     expect(get('/orders/:id/edit_delivery')).to route_to(
       controller: 'orders',
       action: 'edit_delivery',
@@ -17,7 +17,7 @@ RSpec.describe 'routes for Orders', type: :routing do
     )
   end
 
-  it "routes get '/orders/:id/edit_payment' to Orders#edit_address" do
+  it "routes get '/orders/:id/edit_payment' to Orders#edit_payment" do
     expect(get('/orders/:id/edit_payment')).to route_to(
       controller: 'orders',
       action: 'edit_payment',
@@ -25,7 +25,7 @@ RSpec.describe 'routes for Orders', type: :routing do
     )
   end
 
-  it "routes get '/orders/:id/confirm' to Orders#edit_address" do
+  it "routes get '/orders/:id/confirm' to Orders#confirm" do
     expect(get('/orders/:id/confirm')).to route_to(
       controller: 'orders',
       action: 'confirm',
@@ -33,10 +33,10 @@ RSpec.describe 'routes for Orders', type: :routing do
     )
   end
 
-  it "routes get '/orders/:id/complete' to Orders#edit_address" do
-    expect(get('/orders/:id/complete')).to route_to(
+  it "routes get '/orders/:id' to Orders#show" do
+    expect(get('/orders/:id')).to route_to(
       controller: 'orders',
-      action: 'complete',
+      action: 'show',
       id: ':id'
     )
   end
@@ -54,6 +54,13 @@ RSpec.describe 'routes for Orders', type: :routing do
       controller: 'orders',
       action: 'place',
       id: ':id'
+    )
+  end
+
+  it "routes post '/orders' to Orders#index" do
+    expect(get('/orders')).to route_to(
+      controller: 'orders',
+      action: 'index'
     )
   end
 end

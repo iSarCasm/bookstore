@@ -19,6 +19,7 @@ class ShoppingCart
 
   def clear
     @items = []
+    @coupon = nil
   end
 
   def apply_coupon(coupon)

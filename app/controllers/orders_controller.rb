@@ -1,5 +1,11 @@
 class OrdersController < ApplicationController
-  before_filter :get_order_for_edit
+  before_filter :get_order_for_edit, only: [:edit_address, :edit_delivery,
+    :edit_payment, :confirm, :update, :place]
+  before_filter :get_order, only: [:show]
+
+  def index
+    @orders = current_user.orders
+  end
 
   def edit_address
   end
@@ -14,7 +20,7 @@ class OrdersController < ApplicationController
   def confirm
   end
 
-  def complete
+  def show
   end
 
   def update
@@ -30,14 +36,18 @@ class OrdersController < ApplicationController
   def place
     @order.enqueue
     @order.save
-    redirect_to index_path
+    redirect_to show_path(@order)
   end
 
   private
 
-  def get_order_for_edit
+  def get_order
     @order = Order.find(params[:id])
     check_user_for!(@order)
+  end
+
+  def get_order_for_edit
+    get_order
     fail 'You cant edit this one' unless @order.in_progress?
   end
 

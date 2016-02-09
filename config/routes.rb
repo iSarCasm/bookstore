@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get   'orders/:id/edit_delivery', to: 'orders#edit_delivery',  as: :edit_delivery
   get   'orders/:id/edit_payment',  to: 'orders#edit_payment',   as: :edit_payment
   get   'orders/:id/confirm',       to: 'orders#confirm',        as: :confirm
-  get   'orders/:id/complete',      to: 'orders#complete',       as: :complete
   post  'orders/:id/place',         to: 'orders#place',          as: :place
-  patch 'orders/:id',               to: 'orders#update',         as: :order
+  resources :orders, only: [:show, :index, :update]
 end

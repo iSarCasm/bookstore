@@ -24,8 +24,8 @@
               %strong Cart
               = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)") # wtf
           - if user_signed_in?
-            -# %li
-            -#   %a{href: "/orders"} Orders
+            %li
+              %a{href: "/orders"} Orders
             %li.active
               %a{href: edit_user_registration_path} Settings
             %li

@@ -18,8 +18,8 @@ class Order < ActiveRecord::Base
   end
 
   before_save do |order|
-    order.billing_address.save
-    order.shipment_address.save
+    order.billing_address.save if order.billing_address.valid?
+    order.shipment_address.save if order.shipment_address.valid?
   end
 
   accepts_nested_attributes_for :billing_address, :shipment_address, :payment
@@ -30,7 +30,8 @@ class Order < ActiveRecord::Base
   validates :shipment_address, presence: true,  if: "self.in_queue?"
   validates :shipment, presence: true,          if: "self.in_queue?"
   validates :payment, presence: true,           if: "self.in_queue?"
-  validates_associated :billing_address, :shipment_address, :payment, :shipment, if: "self.in_queue?"
+  validates_associated :billing_address, :shipment_address, :payment, :shipment,
+    :coupon, if: "self.in_queue?"
 
 
   aasm do
@@ -75,11 +76,11 @@ class Order < ActiveRecord::Base
   end
 
   def create_order_billing_address
-    billing_address = user.billing_address.clone if user.billing_address.valid?
+    self.billing_address = self.user.billing_address.clone if self.user.billing_address.valid?
   end
 
   def create_order_shipment_address
-    shipment_address = user.delivery_address.clone if user.delivery_address.valid?
+    self.shipment_address = self.user.delivery_address.clone  if self.user.delivery_address.valid?
   end
 
   def set_default_shipment
@@ -87,7 +88,7 @@ class Order < ActiveRecord::Base
   end
 
   def copy_coupon(cart)
-    coupon = cart.coupon
+    self.coupon = cart.coupon
   end
 
   def billing_address
