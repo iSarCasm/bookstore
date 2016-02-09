@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'faker'
 gem 'devise'
 gem 'aasm'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
