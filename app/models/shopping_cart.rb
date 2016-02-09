@@ -47,7 +47,7 @@ class ShoppingCart
   end
 
   def discount
-    coupon&.discount || 0
+    coupon ? coupon.discount : 0
   end
 
   def save
