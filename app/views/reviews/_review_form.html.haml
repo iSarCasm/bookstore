@@ -1,0 +1,10 @@
+=form_for :review, url: reviews_path, method: :post do |f|
+  .field.form-group
+    = f.label :rating, "Rating: "
+    = f.select :rating, (1..5).step(1).to_a, {}, class: 'form-control'
+  .field.form-group
+    = f.label :message
+    = f.text_area :message, class: 'form-control'
+  = f.hidden_field :book_id, value: book.id
+  .actions
+    = f.submit 'Submit', class: ['btn', 'btn-default']

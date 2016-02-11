@@ -22,4 +22,5 @@ RSpec.describe Book, type: :model do
 
   it { should have_many(:authors).through(:book_owns) }
   it { should have_many(:categories).through(:category_books) }
+  it { should have_many(:reviews) }
 end

@@ -33,6 +33,7 @@ RSpec.describe ShoppingCartsController, type: :controller do
 
   describe '#checkout' do
     it 'creates new order' do
+      sign_in create(:user)
       expect(Order).to receive(:create_from_cart).and_return(create(:order))
       post :checkout
     end

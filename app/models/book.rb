@@ -5,6 +5,8 @@ class Book < ActiveRecord::Base
   has_many :category_books
   has_many :categories, through: :category_books
 
+  has_many :reviews
+
   validates :title, presence: true, uniqueness: true
   validates :desc, presence: true
   validates :price, presence: true, numericality: {
@@ -17,4 +19,8 @@ class Book < ActiveRecord::Base
   }
 
   paginates_per 9
+
+  def rating
+    self.reviews.where(approved: true).average(:rating) || 0
+  end
 end

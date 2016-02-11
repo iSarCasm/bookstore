@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get   'orders/:id/confirm',       to: 'orders#confirm',        as: :confirm
   post  'orders/:id/place',         to: 'orders#place',          as: :place
   resources :orders, only: [:show, :index, :update]
+
+  resources :reviews, only: [:create]
 end

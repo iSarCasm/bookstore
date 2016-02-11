@@ -50,6 +50,10 @@ class ShoppingCart
     coupon ? coupon.discount : 0
   end
 
+  def empty?
+    size == 0
+  end
+
   def save
     @@session[SESSION_KEY] = self
   end

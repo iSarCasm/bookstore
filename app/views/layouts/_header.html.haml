@@ -19,13 +19,13 @@
       .navbar-right
         %ul.nav.navbar-nav
           %li.cart
-            %a{href: "/cart"}
+            %a{href: cart_path}
               = icon('shopping-cart')
               %strong Cart
               = (current_cart.size == 0 ? '(EMPTY)' : "(#{current_cart.size } items)") # wtf
           - if user_signed_in?
             %li
-              %a{href: "/orders"} Orders
+              %a{href: orders_path} Orders
             %li.active
               %a{href: edit_user_registration_path} Settings
             %li

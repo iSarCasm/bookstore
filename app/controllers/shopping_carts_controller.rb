@@ -1,5 +1,6 @@
 class ShoppingCartsController < ApplicationController
   def show
+    render 'orders/empty_cart' if current_cart.empty?
   end
 
   def update
@@ -20,9 +21,13 @@ class ShoppingCartsController < ApplicationController
   end
 
   def checkout
-    order = Order.create_from_cart(cart: current_cart, user: current_user)
-    current_cart.clear
-    current_cart.save
-    redirect_to edit_address_path(order)
+    if current_user
+      order = Order.create_from_cart(cart: current_cart, user: current_user)
+      current_cart.clear
+      current_cart.save
+      redirect_to edit_address_path(order)
+    else
+      redirect_to new_user_session_path, redirect_path: cart_path
+    end
   end
 end

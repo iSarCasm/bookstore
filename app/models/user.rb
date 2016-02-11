@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :payments, class_name: "PaymentInfo"
   has_many :orders
+  has_many :reviews
 
   accepts_nested_attributes_for :billing_address, :delivery_address
 

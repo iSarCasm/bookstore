@@ -14,6 +14,14 @@ RSpec.describe BooksController, type: :controller do
         get :show, id: 1
         expect(assigns(:book)).to eq book
       end
+
+      it 'assigns @reviews approved reviews' do
+        book = create(:book, id: 1)
+        reviews = create_list(:review, 3, book: book)
+        approved_reviews = create_list(:review, 2, book: book, approved: true)
+        get :show, id: 1
+        expect(assigns(:reviews)).to eq approved_reviews
+      end
     end
   end
 end
