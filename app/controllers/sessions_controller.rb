@@ -6,10 +6,4 @@ class Users::SessionsController < Devise::SessionsController
       current_user_path
     end
   end
-
-  def create
-    super do |resource|
-
-    end
-  end
 end

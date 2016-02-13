@@ -54,4 +54,42 @@ RSpec.describe Order, type: :model do
         .to eq order.user.delivery_address.street_address
     end
   end
+
+  describe '#discount_string' do
+    it 'returns discount string' do
+      order = Order.new
+      order.coupon = create(:coupon, discount: 0.1)
+      expect(order.discount_string).to eq '-10%'
+    end
+  end
+
+  describe '#discount' do
+    it 'returns discount string' do
+      order = Order.new
+      order.coupon = create(:coupon, discount: 0.1)
+      expect(order.discount).to eq 0.1
+    end
+  end
+
+  describe '#sum_without_discount' do
+    it 'returns total price of all items' do
+      order = create(:order)
+      order.coupon = create(:coupon, discount: 0.1)
+      book_1 = create(:book, price: 10)
+      book_2 = create(:book, price: 4)
+      create(:order_item, book: book_1, quantity: 3, order: order)
+      create(:order_item, book: book_2, quantity: 2, order: order)
+      expect(order.sum_without_discount).to eq 38
+    end
+  end
+
+  describe '#sum' do
+    it 'returns total price of all items' do
+      order = create(:order)
+      order.coupon = create(:coupon, discount: 0.1)
+      book_1 = create(:book, price: 10)
+      create(:order_item, book: book_1, quantity: 3, order: order)
+      expect(order.sum).to eq 27
+    end
+  end
 end

@@ -38,6 +38,17 @@ RSpec.describe ShoppingCart do
     end
   end
 
+  describe '#clear' do
+    it 'resets the cart' do
+      cart = ShoppingCart.new({
+        cart: {"items" => ["id" => 0, "quantity" => 3, "coupon" => "LOL"] }
+      })
+      cart.clear
+      expect(cart.items).to eq []
+      expect(cart.coupon).to eq nil
+    end
+  end
+
   describe '#apply_coupon' do
     it 'accepts coupon.id' do
       cart = ShoppingCart.new
@@ -60,7 +71,7 @@ RSpec.describe ShoppingCart do
   end
 
   describe '#discount' do
-    it 'returns discount string' do
+    it 'returns discount' do
       cart = ShoppingCart.new
       cart.apply_coupon(create(:coupon, discount: 0.1))
       expect(cart.discount).to eq 0.1
@@ -97,6 +108,20 @@ RSpec.describe ShoppingCart do
       book_1 = create(:book, price: 10)
       3.times { cart.add book_1 }
       expect(cart.sum).to eq 27
+    end
+  end
+
+  describe '#empty?' do
+    it 'returns true when no items' do
+      cart = ShoppingCart.new
+      expect(cart).to be_empty
+    end
+
+    it 'returns false when any items' do
+      cart = ShoppingCart.new({
+        cart: {"items" => ["id" => 0, "quantity" => 3] }
+      })
+      expect(cart).to_not be_empty
     end
   end
 end

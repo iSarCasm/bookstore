@@ -86,18 +86,6 @@ class Order < ActiveRecord::Base
     self.coupon = cart.coupon
   end
 
-  def billing_address
-    (super rescue nil) || build_billing_address
-  end
-
-  def shipment_address
-    (super rescue nil) || build_shipment_address
-  end
-
-  def payment
-    (super rescue nil) || build_payment(user: self.user)
-  end
-
   def sum_without_discount
     order_items.inject(0) { |sum, item| sum + item.sum }
   end
@@ -112,5 +100,17 @@ class Order < ActiveRecord::Base
 
   def discount
     coupon ? coupon.discount : 0
+  end
+
+  def billing_address
+    (super rescue nil) || build_billing_address
+  end
+
+  def shipment_address
+    (super rescue nil) || build_shipment_address
+  end
+
+  def payment
+    (super rescue nil) || build_payment(user: self.user)
   end
 end
