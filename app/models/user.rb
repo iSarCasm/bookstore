@@ -4,12 +4,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :billing_address, class_name: "Address"
-  belongs_to :delivery_address, class_name: "Address"
+  belongs_to :billing_address, class_name: "Address", dependent: :destroy
+  belongs_to :delivery_address, class_name: "Address", dependent: :destroy
 
-  has_many :payments, class_name: "PaymentInfo"
-  has_many :orders
-  has_many :reviews
+  has_many :payments, class_name: "PaymentInfo", dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   accepts_nested_attributes_for :billing_address, :delivery_address
 

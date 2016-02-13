@@ -3,19 +3,14 @@ class Order < ActiveRecord::Base
 
   DEFAULT_SHIPMENT_ID = 1
 
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
 
   belongs_to :user, dependent: :destroy
-  belongs_to :billing_address, class_name: "Address"
-  belongs_to :shipment_address, class_name: "Address"
+  belongs_to :billing_address, class_name: "Address", dependent: :destroy
+  belongs_to :shipment_address, class_name: "Address", dependent: :destroy
   belongs_to :payment, class_name: "PaymentInfo"
   belongs_to :shipment
   belongs_to :coupon
-
-  before_destroy do |order|
-    order.billing_address.destroy
-    order.shipment_address.destroy
-  end
 
   before_save do |order|
     order.billing_address.save if order.billing_address.valid?
