@@ -29,7 +29,7 @@
     .col-md-3
       %h3.title
         Payment Information
-        %small= link_to '(edit)', edit_delivery_path(@order)
+        %small= link_to '(edit)', edit_payment_path(@order)
       %p= safe_card_number "#{@order.payment.card}"
       %p= "#{@order.payment.expiration_year} / #{@order.payment.expiration_month}"
   .row.col-xs-12

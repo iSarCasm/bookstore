@@ -1,0 +1,48 @@
+.container
+  %h2 Orders
+  .row
+    .col-md-12
+      %h3 In progress
+      %table.table.table-hover
+        %thead
+          %tr
+            %th ID
+            %th Created Date
+            %th Total Summary
+            %th Link
+        %tbody
+          - @orders.select{ |x| x.in_progress? }.each do |order|
+            =render 'orders/order_row', order: order, in_progress: true
+
+      %h3 In queue
+      %table.table.table-hover
+        %thead
+          %tr
+            %th ID
+            %th Created Date
+            %th Total Summary
+        %tbody
+          - @orders.select{ |x| x.in_queue? }.each do |order|
+            =render 'orders/order_row', order: order, in_progress: false
+
+      %h3 In delivery
+      %table.table.table-hover
+        %thead
+          %tr
+            %th ID
+            %th Created Date
+            %th Total Summary
+        %tbody
+          - @orders.select{ |x| x.in_delivery? }.each do |order|
+            =render 'orders/order_row', order: order, in_progress: false
+
+      %h3 Delivered
+      %table.table.table-hover
+        %thead
+          %tr
+            %th ID
+            %th Created Date
+            %th Total Summary
+        %tbody
+          - @orders.select{ |x| x.delivered? }.each do |order|
+            =render 'orders/order_row', order: order, in_progress: false

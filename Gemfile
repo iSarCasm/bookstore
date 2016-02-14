@@ -37,6 +37,7 @@ group :development, :test do
   gem 'pry'
   gem 'awesome_print'
   gem 'kaminari-rspec'
+  gem 'selenium-webdriver'
 end
 
 group :development do
