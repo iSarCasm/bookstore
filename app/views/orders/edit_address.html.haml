@@ -4,14 +4,14 @@
   = render 'orders/order_editing_step', step: :address
   .row
     = form_for @order do |order|
-      .col-sm-6
+      .col-sm-6#billing
         %h3 Billing Address
         .col-sm-6.col-sm-push-6
           = html_for_errors address_error_messages_of(flash[:errors], :billing_address)
         .col-sm-6.col-sm-pull-6
           = order.fields_for :billing_address do |f|
             = render 'address/edit', f: f
-      .col-sm-6
+      .col-sm-6#shipment
         %h3 Shipment Address
         .col-sm-6.col-sm-push-6
           = html_for_errors address_error_messages_of(flash[:errors], :shipment_address)

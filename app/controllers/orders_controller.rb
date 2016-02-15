@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   def place
     @order.enqueue
     @order.save
-    redirect_to show_path(@order)
+    redirect_to @order
   end
 
   private
