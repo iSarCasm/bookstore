@@ -1,5 +1,6 @@
 Rails.application.configure do
   config.action_mailer.default_url_options = { host: '45.55.152.254' }
+  config.assets.raise_runtime_errors = true
   # Settings specified here will take precedence over those in
   # config/application.rb.
 
