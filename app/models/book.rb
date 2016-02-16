@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+  mount_uploader :image, PhotoUploader
+
   has_many :book_owns
   has_many :authors, through: :book_owns
 

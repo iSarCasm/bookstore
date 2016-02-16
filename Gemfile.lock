@@ -74,6 +74,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.0)
@@ -167,6 +172,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.99)
+    mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     multi_json (1.11.2)
@@ -356,6 +362,7 @@ DEPENDENCIES
   capistrano-safe-deploy-to (~> 1.1.1)
   capistrano-unicorn-nginx (~> 3.2.0)
   capybara
+  carrierwave
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise
@@ -369,6 +376,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   kaminari-rspec
+  mini_magick
   normalize-rails
   pg
   pry

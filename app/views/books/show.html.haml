@@ -1,25 +1,29 @@
 .container
   .row
-    %h2= @book.title
-    %p
-      %strong Price:
-      = number_to_currency @book.price
-    %p
-      %strong= 'Category'.pluralize(@book.categories.count) + ':'
-      = categories_links(@book.categories)
-    %p
-      %strong= 'Author'.pluralize(@book.authors.count) + ':'
-      = author_links(@book.authors)
-    %p
-      %strong Description:
-      = @book.desc
-    %p
-      %strong Average Rating:
-      = @book.rating
-    %a.btn.btn-primary{ href: cart_update_path(book: @book),
-                        data: { method: 'patch',
-                                remote: false } }
-      Add to Cart
+    .col-md-4
+      %center
+        %img{src: @book.image_url(:normal)}
+    .col-md-8
+      %h2= @book.title
+      %p
+        %strong Price:
+        = number_to_currency @book.price
+      %p
+        %strong= 'Category'.pluralize(@book.categories.count) + ':'
+        = categories_links(@book.categories)
+      %p
+        %strong= 'Author'.pluralize(@book.authors.count) + ':'
+        = author_links(@book.authors)
+      %p
+        %strong Description:
+        = @book.desc
+      %p
+        %strong Average Rating:
+        = @book.rating
+      %a.btn.btn-primary{ href: cart_update_path(book: @book),
+                          data: { method: 'patch',
+                                  remote: false } }
+        Add to Cart
   %br
   .row.col-md-4
     %h3 Add review

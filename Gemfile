@@ -27,6 +27,8 @@ gem 'faker'
 gem 'devise'
 gem 'aasm'
 gem 'rails_admin'
+gem 'carrierwave'
+gem "mini_magick"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

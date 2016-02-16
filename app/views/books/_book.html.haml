@@ -1,4 +1,7 @@
 .col-md-4.col-sm-6.book
+  %center
+    %img{src: book.image_url(:small)}
+  %br
   %strong
     %a{href: book_path(book)}= book.title
   %p= truncate(book.desc, length: 100, separator: ' ')
