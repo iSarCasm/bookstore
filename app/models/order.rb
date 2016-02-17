@@ -28,6 +28,9 @@ class Order < ActiveRecord::Base
   validates_associated :billing_address, :shipment_address, :payment, :shipment,
     :coupon, if: "self.in_queue?"
 
+  def aasm_state_enum
+    Order.aasm.states_for_select
+  end
 
   aasm do
     state :in_progress, initilial: true

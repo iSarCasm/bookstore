@@ -25,9 +25,15 @@ class ShoppingCartsController < ApplicationController
       order = Order.create_from_cart(cart: current_cart, user: current_user)
       current_cart.clear
       current_cart.save
-      redirect_to edit_address_path(order)
+      redirect_to edit_address_order_path(order)
     else
       redirect_to new_user_session_path, redirect_path: cart_path
     end
+  end
+
+  def clear
+    current_cart.clear
+    current_cart.save
+    redirect_to cart_path
   end
 end

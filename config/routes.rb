@@ -6,16 +6,18 @@ Rails.application.routes.draw do
   resources :books, only: [:show]
   resources :authors, only: [:show]
 
-  get   'cart', to: 'shopping_carts#show',      as: :cart
-  patch 'cart', to: 'shopping_carts#update',    as: :cart_update
-  post  'cart', to: 'shopping_carts#checkout',  as: :checkout
+  get     'cart', to: 'shopping_carts#show'
+  patch   'cart', to: 'shopping_carts#update'
+  delete  'cart', to: 'shopping_carts#clear'
+  post    'cart', to: 'shopping_carts#checkout',  as: :checkout
 
-  get   'orders/:id/edit_address',  to: 'orders#edit_address',   as: :edit_address
-  get   'orders/:id/edit_delivery', to: 'orders#edit_delivery',  as: :edit_delivery
-  get   'orders/:id/edit_payment',  to: 'orders#edit_payment',   as: :edit_payment
-  get   'orders/:id/confirm',       to: 'orders#confirm',        as: :confirm
-  post  'orders/:id/place',         to: 'orders#place',          as: :place
-  resources :orders, only: [:show, :index, :update]
+  resources :orders, only: [:show, :index, :update] do
+    get :edit_address,  on: :member
+    get :edit_delivery, on: :member
+    get :edit_payment,  on: :member
+    get :confirm,       on: :member
+    post :place,        on: :member
+  end
 
   resources :reviews, only: [:create]
 end

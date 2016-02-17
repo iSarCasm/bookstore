@@ -38,4 +38,16 @@ RSpec.describe ShoppingCartsController, type: :controller do
       post :checkout
     end
   end
+
+  describe '#clear' do
+    it 'redirects back to cart page' do
+      patch :clear
+      expect(response).to redirect_to cart_path
+    end
+
+    it 'clears cart' do
+      allow(current_cart).to
+      patch :clear
+    end
+  end
 end

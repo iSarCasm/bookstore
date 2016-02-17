@@ -1,7 +1,7 @@
 .container
   %h2
     Checkout
-  = render 'orders/order_editing_step', step: :payment
+  = render 'orders/order_editing_step', step: @current_step
   .row
     =form_for @order do |order|
       .col-sm-6.col-sm-push-6
@@ -20,6 +20,6 @@
           .field.form-group
             = f.label :cvv
             = f.text_field :cvv, class: 'form-control'
-      =order.hidden_field :step, value: :payment
+      =order.hidden_field :step, value: @current_step
       .actions
         = order.submit 'Save and Continue', class: ['btn', 'btn-default']

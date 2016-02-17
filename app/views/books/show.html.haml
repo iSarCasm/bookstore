@@ -20,7 +20,7 @@
       %p
         %strong Average Rating:
         = @book.rating
-      %a.btn.btn-primary{ href: cart_update_path(book: @book),
+      %a.btn.btn-primary{ href: cart_path(book: @book),
                           data: { method: 'patch',
                                   remote: false } }
         Add to Cart

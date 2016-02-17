@@ -29,5 +29,6 @@
     .col-xs-12
       .pull-left
         = render 'coupons/apply'
+      = button_to 'Clear', cart_path, method: :delete, class: ['btn', 'btn-primary']
       .pull-right
         = button_to 'Checkout', cart_path, class: ['btn', 'btn-primary']

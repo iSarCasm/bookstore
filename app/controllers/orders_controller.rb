@@ -8,16 +8,20 @@ class OrdersController < ApplicationController
   end
 
   def edit_address
+    @current_step = :address
   end
 
   def edit_delivery
+    @current_step = :shipment
     @available_shipments = Shipment.all.to_a
   end
 
   def edit_payment
+    @current_step = :payment
   end
 
   def confirm
+    @current_step = :confirm
   end
 
   def show
@@ -92,11 +96,11 @@ class OrdersController < ApplicationController
     def go_to_next_step
       case params[:order][:step]
       when 'address'
-        redirect_to edit_delivery_path(@order)
+        redirect_to edit_delivery_order_path(@order)
       when 'shipment'
-        redirect_to edit_payment_path(@order)
+        redirect_to edit_payment_order_path(@order)
       when 'payment'
-        redirect_to confirm_path(@order)
+        redirect_to confirm_order_path(@order)
       end
     end
 end

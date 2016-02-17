@@ -74,19 +74,19 @@ RSpec.describe OrdersController, type: :controller do
     before do
       user = create(:user)
       @order = create(:order, user: user)
-      request.env["HTTP_REFERER"] = edit_address_path(@order)
+      request.env["HTTP_REFERER"] = edit_address_order_path(@order)
       sign_in user
     end
 
     it 'redirects back when errors' do
       patch :update, id: @order,
         order: { billing_address_attributes: {first_name: nil}, step: :address }
-      expect(response).to redirect_to edit_address_path(@order)
+      expect(response).to redirect_to edit_address_order_path(@order)
     end
 
     it 'redirects to next step when no errors' do
       patch :update, id: @order, order: {step: :address }
-      expect(response).to redirect_to edit_delivery_path(@order)
+      expect(response).to redirect_to edit_delivery_order_path(@order)
     end
   end
 

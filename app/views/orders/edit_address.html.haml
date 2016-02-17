@@ -1,7 +1,7 @@
 .container
   %h2
     Checkout
-  = render 'orders/order_editing_step', step: :address
+  = render 'orders/order_editing_step', step: @current_step
   .row
     = form_for @order do |order|
       .col-sm-6#billing
@@ -18,6 +18,6 @@
         .col-sm-6.col-sm-pull-6
           = order.fields_for :shipment_address do |f|
             = render 'address/edit', f: f
-      =order.hidden_field :step, value: :address
+      =order.hidden_field :step, value: @current_step
       .actions
         = order.submit 'Save and Continue', class: ['btn', 'btn-default']
