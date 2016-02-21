@@ -1,9 +1,9 @@
 .container
   %h2
     Checkout
-  = render 'orders/order_editing_step', step: @current_step
+  = render 'checkouts/order_editing_step', step: @current_step
   .row
-    =form_for @order do |order|
+    =form_for @order, url: {controller: :checkouts, action: :update}  do |order|
       .col-sm-6.col-sm-push-6
         = html_for_errors payment_error_messages_of(flash[:errors], :payment)
       .col-sm-6.col-sm-pull-6

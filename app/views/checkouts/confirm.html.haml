@@ -1,12 +1,12 @@
 .container
   %h2
     Checkout
-  = render 'orders/order_editing_step', step: @current_step
+  = render 'checkouts/order_editing_step', step: @current_step
   .row
     .col-md-3
       %h3.title
         Shipment Address
-        %small= link_to '(edit)', edit_address_order_path(@order)
+        %small= link_to '(edit)', edit_address_checkout_path(@order)
       %p= "#{@order.shipment_address.first_name} #{@order.shipment_address.last_name}"
       %p= "#{@order.shipment_address.city} #{@order.shipment_address.country}"
       %p= "#{@order.shipment_address.street_address}"
@@ -15,7 +15,7 @@
     .col-md-3
       %h3.title
         Billing Address
-        %small= link_to '(edit)', edit_address_order_path(@order)
+        %small= link_to '(edit)', edit_address_checkout_path(@order)
       %p= "#{@order.billing_address.first_name} #{@order.billing_address.last_name}"
       %p= "#{@order.billing_address.city} #{@order.billing_address.country}"
       %p= "#{@order.billing_address.street_address}"
@@ -24,12 +24,12 @@
     .col-md-3
       %h3.title
         Shipment
-        %small= link_to '(edit)', edit_delivery_order_path(@order)
+        %small= link_to '(edit)', edit_delivery_checkout_path(@order)
       %p= "#{@order.shipment.name}"
     .col-md-3
       %h3.title
         Payment Information
-        %small= link_to '(edit)', edit_payment_order_path(@order)
+        %small= link_to '(edit)', edit_payment_checkout_path(@order)
       %p= safe_card_number "#{@order.payment.card}"
       %p= "#{@order.payment.expiration_year} / #{@order.payment.expiration_month}"
   .row.col-xs-12
@@ -58,4 +58,4 @@
           %td
             %strong= number_to_currency @order.sum
   .row.col-xs-12
-    =link_to "PLACE ORDER", place_order_path(@order), class: ['btn', 'btn-primary'], method: :post
+    =link_to "PLACE ORDER", place_checkout_path(@order), class: ['btn', 'btn-primary'], method: :post

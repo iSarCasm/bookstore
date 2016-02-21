@@ -46,8 +46,12 @@ RSpec.describe ShoppingCartsController, type: :controller do
     end
 
     it 'clears cart' do
-      allow(current_cart).to
+      cart = ShoppingCart.new({
+        cart: {"items" => ["id" => 0, "quantity" => 3] }
+      })
+      allow_any_instance_of(ApplicationController).to receive(:current_cart).and_return(cart)
       patch :clear
+      expect(cart).to be_empty
     end
   end
 end

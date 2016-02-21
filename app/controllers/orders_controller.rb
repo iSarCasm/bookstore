@@ -1,46 +1,11 @@
 class OrdersController < ApplicationController
-  before_filter :get_order_for_edit, only: [:edit_address, :edit_delivery,
-    :edit_payment, :confirm, :update, :place]
   before_filter :get_order, only: [:show]
 
   def index
     @orders = current_user.orders
   end
 
-  def edit_address
-    @current_step = :address
-  end
-
-  def edit_delivery
-    @current_step = :shipment
-    @available_shipments = Shipment.all.to_a
-  end
-
-  def edit_payment
-    @current_step = :payment
-  end
-
-  def confirm
-    @current_step = :confirm
-  end
-
   def show
-  end
-
-  def update
-    @order.update(order_params)
-    flash[:errors] = @order.errors.messages
-    if @order.errors.empty?
-      go_to_next_step
-    else
-      redirect_to :back
-    end
-  end
-
-  def place
-    @order.enqueue
-    @order.save
-    redirect_to @order
   end
 
   private
@@ -55,52 +20,41 @@ class OrdersController < ApplicationController
     fail 'You cant edit this one' unless @order.in_progress?
   end
 
-    def check_user_for!(order)
-      if (current_user != order.user)
-        fail "Permission denied."
-      end
+  def check_user_for!(order)
+    if (current_user != order.user)
+      fail "Permission denied."
     end
+  end
 
-    def order_params
-      params.require(:order).permit(
-        :shipment_id,
-        billing_address_attributes: [
-          :id,
-          :first_name,
-          :last_name,
-          :street_address,
-          :city,
-          :country,
-          :zip,
-          :phone
-        ],
-        shipment_address_attributes: [
-          :id,
-          :first_name,
-          :last_name,
-          :street_address,
-          :city,
-          :country,
-          :zip,
-          :phone
-        ],
-        payment_attributes: [
-          :card,
-          :expiration_year,
-          :expiration_month,
-          :cvv
-        ]
-      )
-    end
-
-    def go_to_next_step
-      case params[:order][:step]
-      when 'address'
-        redirect_to edit_delivery_order_path(@order)
-      when 'shipment'
-        redirect_to edit_payment_order_path(@order)
-      when 'payment'
-        redirect_to confirm_order_path(@order)
-      end
-    end
+  def order_params
+    params.require(:order).permit(
+      :shipment_id,
+      billing_address_attributes: [
+        :id,
+        :first_name,
+        :last_name,
+        :street_address,
+        :city,
+        :country,
+        :zip,
+        :phone
+      ],
+      shipment_address_attributes: [
+        :id,
+        :first_name,
+        :last_name,
+        :street_address,
+        :city,
+        :country,
+        :zip,
+        :phone
+      ],
+      payment_attributes: [
+        :card,
+        :expiration_year,
+        :expiration_month,
+        :cvv
+      ]
+    )
+  end
 end

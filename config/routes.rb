@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   delete  'cart', to: 'shopping_carts#clear'
   post    'cart', to: 'shopping_carts#checkout',  as: :checkout
 
-  resources :orders, only: [:show, :index, :update] do
+  resources :orders, only: [:show, :index, :update]
+  
+  resources :checkouts, only: [:update] do
     get :edit_address,  on: :member
     get :edit_delivery, on: :member
     get :edit_payment,  on: :member
