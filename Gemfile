@@ -29,6 +29,7 @@ gem 'aasm'
 gem 'rails_admin'
 gem 'carrierwave'
 gem "mini_magick"
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

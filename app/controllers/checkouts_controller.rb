@@ -1,4 +1,5 @@
 class CheckoutsController < ApplicationController
+  # load_and_authorize_resource class: 'Order'
   before_filter :get_order_for_edit
 
   def edit_address

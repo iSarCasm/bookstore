@@ -50,6 +50,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    cancancan (1.13.1)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -355,6 +356,7 @@ DEPENDENCIES
   aasm
   autoprefixer-rails
   awesome_print
+  cancancan (~> 1.10)
   capistrano (~> 3.2.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)
