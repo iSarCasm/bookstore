@@ -1,30 +1,18 @@
 class OrdersController < ApplicationController
-  before_filter :get_order, only: [:show]
+  load_and_authorize_resource
 
   def index
     @orders = current_user.orders
+    @in_progress  = @orders.select{ |x| x.in_progress? }
+    @in_queue     = @orders.select{ |x| x.in_queue? }
+    @in_delivery  = @orders.select{ |x| x.in_delivery? }
+    @delivered    = @orders.select{ |x| x.delivered? }
   end
 
   def show
   end
 
   private
-
-  def get_order
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
-  end
-
-  def get_order_for_edit
-    get_order
-    fail 'You cant edit this one' unless @order.in_progress?
-  end
-
-  def check_user_for!(order)
-    if (current_user != order.user)
-      fail "Permission denied."
-    end
-  end
 
   def order_params
     params.require(:order).permit(

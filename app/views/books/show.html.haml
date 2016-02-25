@@ -25,10 +25,15 @@
                                   remote: false } }
         Add to Cart
   %br
-  .row.col-md-4
-    %h3 Add review
-    =render 'reviews/review_form', book: @book
+    -if can? :create, Review
+      .row.col-md-4
+        %h3 Add review
+        =render 'reviews/review_form', book: @book
   %br
-  .row.col-md-12
-    %h3 Reviews
-    =render @reviews
+    -if can? :read, Review
+      .row.col-md-12
+        %h3 Reviews
+        =render @reviews
+        - if @reviews.empty?
+          %p
+            %i No reviews yet.

@@ -11,8 +11,10 @@
             %th Total Summary
             %th Link
         %tbody
-          - @orders.select{ |x| x.in_progress? }.each do |order|
+          - @in_progress.each do |order|
             =render 'orders/order_row', order: order, in_progress: true
+      -if @in_progress.empty?
+        %i No orders yet.
 
       %h3 In queue
       %table.table.table-hover
@@ -22,8 +24,10 @@
             %th Created Date
             %th Total Summary
         %tbody
-          - @orders.select{ |x| x.in_queue? }.each do |order|
+          - @in_queue.each do |order|
             =render 'orders/order_row', order: order, in_progress: false
+      -if @in_queue.empty?
+        %i No orders yet.
 
       %h3 In delivery
       %table.table.table-hover
@@ -33,8 +37,10 @@
             %th Created Date
             %th Total Summary
         %tbody
-          - @orders.select{ |x| x.in_delivery? }.each do |order|
+          - @in_delivery.each do |order|
             =render 'orders/order_row', order: order, in_progress: false
+      -if @in_delivery.empty?
+        %i No orders yet.
 
       %h3 Delivered
       %table.table.table-hover
@@ -44,5 +50,7 @@
             %th Created Date
             %th Total Summary
         %tbody
-          - @orders.select{ |x| x.delivered? }.each do |order|
+          -@delivered.each do |order|
             =render 'orders/order_row', order: order, in_progress: false
+      -if @delivered.empty?
+        %i No orders yet.
