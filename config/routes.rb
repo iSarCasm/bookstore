@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post    'cart', to: 'shopping_carts#checkout',  as: :checkout
 
   resources :orders, only: [:show, :index, :update]
-  
+
   resources :checkouts, only: [:update] do
     get :edit_address,  on: :member
     get :edit_delivery, on: :member
