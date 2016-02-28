@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          :omniauth_providers => [:github]
 
+  attr_accessor :provider, :uid, :email, :password
+
   belongs_to :billing_address, class_name: "Address", dependent: :destroy
   belongs_to :delivery_address, class_name: "Address", dependent: :destroy
 
