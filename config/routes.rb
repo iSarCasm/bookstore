@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: {registrations: 'registrations'}
+  devise_for :users, controllers: {registrations: 'registrations',
+                                  omniauth_callbacks: "callbacks"}
   root 'pages#index', as: :index
 
   resources :books, only: [:show]
