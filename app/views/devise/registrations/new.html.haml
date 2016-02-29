@@ -22,4 +22,9 @@
         .actions
           = f.submit "Sign up", class: ['btn', 'btn-primary']
       %br
+      %p
+        = link_to "Sign in with Github", "auth/github"
+      %p
+        = link_to "Sign in with FaceBook", "auth/facebook"
+      %br
       = render "devise/shared/links"
