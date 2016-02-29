@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
 
 
   def self.create_with_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+    where(email: auth.info.email).first_or_create! do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.email ||= "LOL@mail.lol"
+      user.email ||= "#{auth.uid}@github.auth"
       user.password = Devise.friendly_token[0,20]
     end
   end
