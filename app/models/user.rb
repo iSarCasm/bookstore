@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       # user.email = auth.info.email
-      user.email = 'poop'
+      user.email = auth.uid
       user.password = Devise.friendly_token[0,20]
     end
   end
