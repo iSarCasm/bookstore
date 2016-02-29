@@ -1,45 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :configure_permitted_parameters
-
   def destroy
     if params[:confirm]
       super
     else
       redirect_to :back
-    end
-  end
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit({ billing_address_attributes:
-                [
-                  :id,
-                  :first_name,
-                  :last_name,
-                  :street_address,
-                  :city,
-                  :country,
-                  :zip,
-                  :phone
-                ]
-              },
-              { delivery_address_attributes:
-                [
-                  :first_name,
-                  :last_name,
-                  :street_address,
-                  :city,
-                  :country,
-                  :zip,
-                  :phone
-                ]
-              },
-              :email,
-              :password,
-              :password_confirmation,
-              :current_password)
     end
   end
 
