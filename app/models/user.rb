@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  attr_accessor :provider, :uid, :email, :password
-
   belongs_to :billing_address, class_name: "Address", dependent: :destroy
   belongs_to :delivery_address, class_name: "Address", dependent: :destroy
 
