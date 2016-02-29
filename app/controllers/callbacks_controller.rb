@@ -3,4 +3,9 @@ class CallbacksController < Devise::OmniauthCallbacksController
     @user = User.create_with_omniauth(request.env["omniauth.auth"])
     sign_in_and_redirect @user
   end
+
+  def facebook
+    @user = User.create_with_omniauth(request.env["omniauth.auth"])
+    sign_in_and_redirect @user
+  end
 end

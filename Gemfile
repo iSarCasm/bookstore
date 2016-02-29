@@ -28,6 +28,7 @@ gem 'faker'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-facebook'
 
 gem 'aasm'
 gem 'rails_admin'

@@ -1,7 +1,6 @@
 .container
   .row
     .col-sm-4.col-xs-12
-      = link_to "Sign in with Github", "auth/github"
       %h2 Log in
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .field.form-group
@@ -18,5 +17,10 @@
             = f.label :remember_me
         .actions
           = f.submit "Log in", class: ['btn', 'btn-primary']
+      %br
+      %p
+        = link_to "Sign in with Github", "auth/github"
+      %p
+        = link_to "Sign in with FaceBook", "auth/facebook"
       %br
       = render "devise/shared/links"

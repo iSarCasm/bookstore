@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
-         :omniauth_providers => [:github]
+         :omniauth_providers => [:github, :facebook]
 
   belongs_to :billing_address, class_name: "Address", dependent: :destroy
   belongs_to :delivery_address, class_name: "Address", dependent: :destroy
