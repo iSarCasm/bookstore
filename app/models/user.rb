@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.email ||= "#{auth.uid}@github.auth#{(1..999).to_a.sample}"
+      user.email = "#{auth.uid}@github.auth#{(1..999).to_a.sample}"
       user.password = Devise.friendly_token[0,20]
     end
   end
