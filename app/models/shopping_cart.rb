@@ -8,12 +8,14 @@ class ShoppingCart
     restore(session[SESSION_KEY])
   end
 
-  def add(book)
+  def add(book, count = 1)
     book = accept_book_model(book)
-    if present?(book)
-      find(book).increase
-    else
-      @items << CartItem.new(book)
+    count.times do
+      if present?(book)
+        find(book).increase
+      else
+        @items << CartItem.new(book)
+      end
     end
   end
 

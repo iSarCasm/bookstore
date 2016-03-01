@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'pages/index.html.haml' do
+RSpec.describe 'pages/shop.html.haml' do
   context 'when anyone visits the page' do
     it 'shows many books', verify_stubs: false do
       assign(:categories, build_list(:category, 3))

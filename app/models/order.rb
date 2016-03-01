@@ -21,12 +21,12 @@ class Order < ActiveRecord::Base
 
   validates :user, presence: true
 
-  validates :billing_address, presence: true,   if: "self.in_queue?"
-  validates :shipment_address, presence: true,  if: "self.in_queue?"
-  validates :shipment, presence: true,          if: "self.in_queue?"
-  validates :payment, presence: true,           if: "self.in_queue?"
+  validates :billing_address, presence: true,   if: "!self.in_progress?"
+  validates :shipment_address, presence: true,  if: "!self.in_progress?"
+  validates :shipment, presence: true,          if: "!self.in_progress?"
+  validates :payment, presence: true,           if: "!self.in_progress?"
   validates_associated :billing_address, :shipment_address, :payment, :shipment,
-    :coupon, if: "self.in_queue?"
+    :coupon, if: "!self.in_progress?"
 
   def aasm_state_enum
     Order.aasm.states_for_select

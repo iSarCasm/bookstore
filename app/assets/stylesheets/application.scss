@@ -34,3 +34,23 @@ ol {
 .btn{
     margin-right:10px;
 }
+
+.carousel-control {
+  background-image: none !important;
+  color: black;
+  &:hover   { color: gray; }
+  &:active  { color: gray; }
+  &:focus   { color: gray; }
+}
+
+.left.carousel-control {
+  margin-left: -100px;
+}
+
+.right.carousel-control {
+  margin-right: -100px;
+}
+
+#carousel__index {
+  margin-top:  100px;
+}

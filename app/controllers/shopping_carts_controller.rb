@@ -4,8 +4,8 @@ class ShoppingCartsController < ApplicationController
   end
 
   def update
-    if params[:book]
-      current_cart.add(params[:book])
+    if params[:book_item]
+      current_cart.add(params[:book_item][:book], params[:book_item][:quantity].to_i)
       current_cart.save
     end
 
