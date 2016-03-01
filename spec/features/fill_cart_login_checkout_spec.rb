@@ -7,8 +7,6 @@ RSpec.describe "fill cart -> login -> checkout", :type => :feature do
     book_2 = create(:book)
     default_shipment = create(:shipment)
 
-    expect(Book.find(1)).to eq book_1
-
     visit book_path(book_1)
     click_on 'Add to Cart'
     click_on 'Add to Cart'
