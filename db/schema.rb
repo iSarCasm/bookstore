@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228114844) do
+ActiveRecord::Schema.define(version: 20160229235107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,21 @@ ActiveRecord::Schema.define(version: 20160228114844) do
   end
 
   add_index "payment_infos", ["user_id"], name: "index_payment_infos_on_user_id", using: :btree
+
+  create_table "rails_admin_settings", force: :cascade do |t|
+    t.boolean  "enabled",    default: true
+    t.string   "kind",       default: "string", null: false
+    t.string   "ns",         default: "main"
+    t.string   "key",                           null: false
+    t.text     "raw"
+    t.string   "label"
+    t.string   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_settings", ["key"], name: "index_rails_admin_settings_on_key", using: :btree
+  add_index "rails_admin_settings", ["ns", "key"], name: "index_rails_admin_settings_on_ns_and_key", unique: true, using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
