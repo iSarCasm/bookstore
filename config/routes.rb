@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   resources :books, only: [:show]
   resources :authors, only: [:show]
 
-  get     'cart', to: 'shopping_carts#show'
-  patch   'cart', to: 'shopping_carts#update'
-  delete  'cart', to: 'shopping_carts#clear'
-  post    'cart', to: 'shopping_carts#checkout',  as: :checkout
+  resource :shopping_carts, only: [:show, :update], path: '/cart' do
+    post    :add,       on: :collection
+    delete  :clear,     on: :collection
+    post    :checkout,  on: :collection
+  end
 
   resources :orders, only: [:show, :index, :update]
 

@@ -49,7 +49,7 @@ RSpec.describe "books/show", type: :view do
     book = assign(:book, build(:book))
     render
     expect(rendered)
-      .to have_link('Add to Cart', href: cart_path(book: book))
+      .to have_button 'Add to Cart'
   end
 
   it 'displays reviews for this book' do

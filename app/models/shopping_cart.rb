@@ -56,6 +56,10 @@ class ShoppingCart
     size == 0
   end
 
+  def update(id, quantity)
+    find(id).quantity = quantity.to_i
+  end
+
   def save
     @@session[SESSION_KEY] = self
   end

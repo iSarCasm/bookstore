@@ -20,10 +20,7 @@
       %p
         %strong Average Rating:
         = @book.rating
-      %a.btn.btn-primary{ href: cart_path(book_item: {book: @book, quantity: 1}),
-                          data: { method: 'patch',
-                                  remote: false } }
-        Add to Cart
+      =render 'books/add', book: @book
   %br
     -if can? :create, Review
       .row.col-md-4

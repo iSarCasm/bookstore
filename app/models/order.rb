@@ -1,8 +1,6 @@
 class Order < ActiveRecord::Base
   include AASM
 
-  DEFAULT_SHIPMENT_ID = 1
-
   has_many :order_items, dependent: :destroy
 
   belongs_to :user, dependent: :destroy
@@ -69,7 +67,9 @@ class Order < ActiveRecord::Base
 
   def add_order_items(cart)
     cart.items.each do |item|
-      self.order_items.build(book_id: item.id, quantity: item.quantity)
+      if item.quantity > 0
+        self.order_items.build(book_id: item.id, quantity: item.quantity)
+      end
     end
   end
 
@@ -82,7 +82,7 @@ class Order < ActiveRecord::Base
   end
 
   def set_default_shipment
-    self.shipment = Shipment.find(DEFAULT_SHIPMENT_ID)
+    self.shipment = Shipment.first
   end
 
   def copy_coupon(cart)
