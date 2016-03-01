@@ -38,4 +38,38 @@ RSpec.describe Book, type: :model do
       expect(book.rating).to eq(0)
     end
   end
+
+  describe '.bestseller' do
+    it 'returns most selling books' do
+      create_list(:book, 3)
+
+      top_books = create_list(:book, 3)
+      some_order = create(:order, aasm_state: 'delivered')
+      top_books.each do |b|
+        create(:order_item, book: b, quantity: 10, order: some_order)
+      end
+
+      create_list(:book, 3)
+
+      expect(Book.bestseller(3)).to match_array top_books
+    end
+  end
+
+  describe '.from_category' do
+    it 'returns all books from selected category' do
+      c1 = create(:category)
+      c2 = create(:category)
+      needed_books  = create_list(:book, 3, category: c1)
+      other_books   = create_list(:book, 3, category: c2)
+      expect(Book.from_category(c1)).to match_array needed_books
+    end
+
+    it 'returns all books when no category' do
+      c1 = create(:category)
+      c2 = create(:category)
+      needed_books  = create_list(:book, 3, category: c1)
+      other_books   = create_list(:book, 3, category: c2)
+      expect(Book.from_category).to match_array Book.all
+    end
+  end
 end

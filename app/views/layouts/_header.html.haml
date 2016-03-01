@@ -16,6 +16,11 @@
         %ul.nav.navbar-nav
           %li
             %a{href: '/'} Home
+          %li
+            %a{href: shop_path} Shop
+          -if can? :manage, :all
+            %li
+              %a{href: '/admin'} Admin Panel
       .navbar-right
         %ul.nav.navbar-nav
           %li.cart

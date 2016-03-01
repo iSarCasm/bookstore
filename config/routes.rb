@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'registrations',
                                   omniauth_callbacks: "callbacks"}
   root 'pages#index', as: :index
+  get  '/shop', to: 'pages#shop', as: :shop
 
   resources :books, only: [:show]
   resources :authors, only: [:show]

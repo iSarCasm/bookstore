@@ -2,7 +2,8 @@ FactoryGirl.define do
   factory :book do
     transient do
       categories_count  1
-      authors_count   1
+      authors_count     1
+      category          nil
     end
 
     sequence(:id)   { |n| n }
@@ -21,6 +22,10 @@ FactoryGirl.define do
         book.authors    = build_list(:author,
           evaluator.authors_count, books: [book])
       end
+
+      if evaluator.category
+        build(:category_book, category: evaluator.category, book: book)
+      end
     end
 
     after(:create) do |book, evaluator|
@@ -32,6 +37,10 @@ FactoryGirl.define do
       if book.authors.empty?
         book.authors    = create_list(:author,
           evaluator.authors_count, books: [book])
+      end
+
+      if evaluator.category
+        create(:category_book, category: evaluator.category, book: book)
       end
     end
   end

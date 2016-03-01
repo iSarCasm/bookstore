@@ -5,5 +5,6 @@ FactoryGirl.define do
     association :billing_address,   factory: :address
     association :shipment_address,  factory: :address
     shipment
+    aasm_state  'in_process'
   end
 end
