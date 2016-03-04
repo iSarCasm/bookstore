@@ -13,11 +13,6 @@ RSpec.describe PaymentInfo, type: :model do
   it { should validate_presence_of :expiration_month }
   it { should validate_presence_of :cvv }
 
-
-  it { should validate_numericality_of(:cvv)
-        .is_greater_than_or_equal_to(100)
-        .is_less_than_or_equal_to(999)}
-
   it { should validate_numericality_of(:expiration_year)
         .is_greater_than_or_equal_to(2015)
         .is_less_than_or_equal_to(2100)}
@@ -37,6 +32,14 @@ RSpec.describe PaymentInfo, type: :model do
     wrong_payment = build(:payment_info, card: "abcdabcdabcdabcd")
     expect(wrong_payment.valid?).to be_falsey
   end
+
+  it 'validates cvv is 3 digits only' do
+    wrong_payment = build(:payment_info, cvv: 4156)
+    expect(wrong_payment.valid?).to be_falsey
+    valid_payment = build(:payment_info, cvv: 415)
+    expect(valid_payment.valid?).to be_truthy
+  end
+
 
   it { should belong_to(:user) }
   it { should have_many(:orders) }

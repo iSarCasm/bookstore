@@ -9,19 +9,23 @@ Rails.application.routes.draw do
   resources :authors, only: [:show]
 
   resource :shopping_carts, only: [:show, :update], path: '/cart' do
-    post    :add,       on: :collection
-    delete  :clear,     on: :collection
-    post    :checkout,  on: :collection
+    collection do
+      post    :add
+      delete  :clear
+      post    :checkout
+    end
   end
 
   resources :orders, only: [:show, :index, :update]
 
   resources :checkouts, only: [:update] do
-    get :edit_address,  on: :member
-    get :edit_delivery, on: :member
-    get :edit_payment,  on: :member
-    get :confirm,       on: :member
-    post :place,        on: :member
+    member do
+      get :edit_address
+      get :edit_delivery
+      get :edit_payment
+      get :confirm
+      post :place
+    end
   end
 
   resources :reviews, only: [:create]
