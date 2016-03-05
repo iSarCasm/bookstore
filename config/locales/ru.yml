@@ -1,0 +1,48 @@
+ru:
+  title: 'Добро пожаловать в наш магазин! Выбирайте что угодно, мы отправим куда угодно (топ перевод)!'
+  header:
+    home: 'Главная'
+    shop: 'Магазин'
+    cart: 'Корзина'
+    empty: 'ПУСТО'
+    items: 'позиций'
+    orders: 'Заказы'
+    settings: 'Настройки'
+    admin: 'Админ Панель'
+  main:
+    products: 'Книги'
+    categories: 'Категории'
+  cart:
+    add: 'Добавить в корзину'
+  book:
+    price: 'Цена'
+    category: 'Категория'
+    author: "Автор"
+    desc: "Описание"
+    avg_rating: "Оценка"
+    reviews:
+      title: 'Отзывы'
+      add: 'Добавить отзыв'
+      empty: 'К этому товару пока нет отзывов.'
+  orders:
+    title: "Заказы"
+    in_progress: "В процессе"
+    in_queue: "В очереди"
+    in_delivery: "В пути"
+    delivered: "Отправлен"
+    empty: "Здесь пока пусто."
+    created_at: "Заказ создан"
+    sum: "Стоимость заказа"
+    link: 'Ссылка'
+    show: 'открыть'
+
+  settings:
+    title: 'Настройки'
+    billing_ad: 'Адресс Оплаты'
+    delivery_ad: 'Адресс Доставки'
+    email: 'Email'
+    password: 'Пароль'
+    remove: 'Удалить аккаунт'
+    remove_butt: 'Пожалуйста, удалите мой аккаунт'
+    remove_desc: 'Я понимаю, что все данные будут утеряны.'
+    save: 'Сохранить'

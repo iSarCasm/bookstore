@@ -1,23 +1,53 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  title: 'Welcome to our amazing Bookstore! Choose anything you wish, we`ll ship it anywhere!'
+
+  header:
+    home: 'Home'
+    shop: 'Shop'
+    cart: 'Cart'
+    empty: 'EMPTY'
+    orders: 'Orders'
+    settings: 'Settings'
+    items: 'items'
+    admin: 'Admin Panel'
+
+  main:
+    products: 'Books'
+    categories: 'Categories'
+
+  cart:
+    add: 'Add to Cart'
+
+  book:
+    price: 'Price'
+    category: 'Category'
+    author: "Author"
+    desc: "Description"
+    avg_rating: "Rating"
+    reviews:
+      title: 'Reviews'
+      add: 'Add Review'
+      empty: 'No reviews yet.'
+
+  orders:
+    title: 'Orders'
+    in_progress: 'In progress'
+    in_queue: 'In queue'
+    in_delivery: 'In delivery'
+    delivered: 'Delivered'
+    empty: 'No orders yet.'
+    created_at: 'Created Date'
+    sum: 'Total Summary'
+    link: 'Link'
+    show: 'show'
+
+  settings:
+    title: 'Settings'
+    billing_ad: 'Billing Address'
+    delivery_ad: 'Delivery Address'
+    email: 'Email'
+    password: 'Password'
+    remove: 'Remove Account'
+    remove_butt: 'Please Remove My Account'
+    remove_desc: 'I understand all data will be lost.'
+    save: 'Save'

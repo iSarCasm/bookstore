@@ -3,4 +3,4 @@
     = number_field_tag :quantity, '1', min: 1, class: 'form-control'
   = hidden_field_tag :book, book.id
   .actions
-    =submit_tag "Add to Cart", class: ['btn', 'btn-primary']
+    =submit_tag t('cart.add'), class: ['btn', 'btn-primary']

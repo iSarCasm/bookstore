@@ -1,56 +1,59 @@
 .container
-  %h2 Orders
+  %h2= t('orders.title')
   .row
     .col-md-12
-      %h3 In progress
+      %h3= t('orders.in_progress')
       %table.table.table-hover
         %thead
           %tr
             %th ID
-            %th Created Date
-            %th Total Summary
-            %th Link
+            %th= t('orders.created_at')
+            %th= t('orders.sum')
+            %th= t('orders.link')
         %tbody
           - @in_progress.each do |order|
             =render 'orders/order_row', order: order, in_progress: true
       -if @in_progress.empty?
-        %i No orders yet.
+        %i= t('orders.empty')
 
-      %h3 In queue
+      %h3= t('orders.in_queue')
       %table.table.table-hover
         %thead
           %tr
             %th ID
-            %th Created Date
-            %th Total Summary
+            %th= t('orders.created_at')
+            %th= t('orders.sum')
+            %th= t('orders.link')
         %tbody
           - @in_queue.each do |order|
             =render 'orders/order_row', order: order, in_progress: false
       -if @in_queue.empty?
-        %i No orders yet.
+        %i= t('orders.empty')
 
-      %h3 In delivery
+      %h3= t('orders.in_delivery')
       %table.table.table-hover
         %thead
           %tr
             %th ID
-            %th Created Date
-            %th Total Summary
+            %th= t('orders.created_at')
+            %th= t('orders.sum')
+            %th= t('orders.link')
         %tbody
           - @in_delivery.each do |order|
             =render 'orders/order_row', order: order, in_progress: false
       -if @in_delivery.empty?
-        %i No orders yet.
+        %i= t('orders.empty')
 
-      %h3 Delivered
+      %h3= t('orders.delivered')
       %table.table.table-hover
         %thead
           %tr
             %th ID
-            %th Created Date
-            %th Total Summary
+            %th= t('orders.created_at')
+            %th= t('orders.sum')
+            %th= t('orders.link')
         %tbody
           -@delivered.each do |order|
             =render 'orders/order_row', order: order, in_progress: false
       -if @delivered.empty?
-        %i No orders yet.
+        %i= t('orders.empty')

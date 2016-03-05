@@ -2,6 +2,9 @@
 
 en:
   devise:
+    sign_in: 'Sign In'
+    sign_up: 'Sign Up'
+    sign_out: 'Sign Out'
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
