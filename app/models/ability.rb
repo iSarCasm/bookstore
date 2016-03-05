@@ -11,7 +11,7 @@ class Ability
       if user.id
         can [:read], Order, user_id: user.id
         can [:place, :edit_address, :edit_payment, :edit_delivery, :confirm, :update], Order do |order|
-          order.aasm_state == :in_queue
+          order.aasm_state == :in_progress.to_s
         end
         can :manage, User, id: user.id
         can :create, Review
