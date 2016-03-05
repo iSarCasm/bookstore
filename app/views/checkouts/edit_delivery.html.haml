@@ -1,7 +1,16 @@
 .container
   %h2
     Checkout
-  = render 'checkouts/order_editing_step', step: @current_step
+  %h3.col-md-offset-1.col-md-2
+    %a{href: edit_address_checkout_path(@order), class: 'step'} Address
+  %h3.col-md-2
+    .step{class: 'current'} Shipment
+  %h3.col-md-2
+    .step Payment
+  %h3.col-md-2
+    .step Confirm
+  %h3.col-md-2
+    .step Complete
   .row.col-md-12
     = form_for @order, url: {controller: :checkouts, action: :update}  do |order|
       - @available_shipments.each do |shipment|

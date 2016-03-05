@@ -9,7 +9,10 @@ class Ability
       can :dashboard              # grant access to the dashboard
     else
       if user.id
-        can [:index, :show], Order, user_id: user.id
+        can [:read], Order, user_id: user.id
+        can [:place, :edit_address, :edit_payment, :edit_delivery, :confirm, :update], Order do |order|
+          order.aasm_state == :in_queue
+        end
         can :manage, User, id: user.id
         can :create, Review
       end

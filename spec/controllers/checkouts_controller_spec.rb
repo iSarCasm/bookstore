@@ -47,10 +47,10 @@ RSpec.describe CheckoutsController, type: :controller do
 
   describe '#update' do
     before do
-      user = create(:user)
-      @order = create(:order, user: user)
+      @user = create(:user)
+      @order = create(:order, user: @user)
       request.env["HTTP_REFERER"] = edit_address_checkout_path(@order)
-      sign_in user
+      sign_in @user
     end
 
     it 'redirects back when errors' do
@@ -62,6 +62,19 @@ RSpec.describe CheckoutsController, type: :controller do
     it 'redirects to next step when no errors' do
       patch :update, id: @order, order: {step: :address }
       expect(response).to redirect_to edit_delivery_checkout_path(@order)
+    end
+
+    it 'fails when guest' do
+      sign_out @user
+      patch :update, id: @order, order: {step: :address }
+      expect(response).not_to redirect_to edit_delivery_checkout_path(@order)
+    end
+
+    it 'fails when other user' do
+      sign_out @user
+      sign_in create(:user)
+      patch :update, id: @order, order: {step: :address }
+      expect(response).not_to redirect_to edit_delivery_checkout_path(@order)
     end
   end
 

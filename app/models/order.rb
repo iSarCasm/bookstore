@@ -105,6 +105,19 @@ class Order < ActiveRecord::Base
     coupon ? coupon.discount : 0
   end
 
+  def address_invalid?
+    !(self.billing_address && self.billing_address.valid?) ||
+    !(self.shipment_address && self.shipment_address.valid?)
+  end
+
+  def delivery_invalid?
+    !(self.shipment)
+  end
+
+  def payment_invalid?
+    !(self.payment && self.payment.valid?)
+  end
+
   def billing_address
     (super rescue nil) || build_billing_address
   end

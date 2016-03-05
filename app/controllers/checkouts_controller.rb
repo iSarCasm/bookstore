@@ -1,6 +1,5 @@
 class CheckoutsController < ApplicationController
-  # load_and_authorize_resource class: 'Order'
-  before_filter :get_order_for_edit
+  load_and_authorize_resource :order, class: Order, parent: false
 
   def edit_address
     @current_step = :address
@@ -30,11 +29,11 @@ class CheckoutsController < ApplicationController
   end
 
   def place
-    if address_invalid?
+    if @order.address_invalid?
       redirect_to action: :edit_address
-    elsif delivery_invalid?
+    elsif @order.delivery_invalid?
       redirect_to action: :edit_delivery
-    elsif payment_invalid?
+    elsif @order.payment_invalid?
       redirect_to action: :edit_payment
     else
       @order.enqueue
@@ -45,34 +44,15 @@ class CheckoutsController < ApplicationController
 
   private
 
-  def get_order
-    @order = Order.find(params[:id])
-    check_user_for!(@order)
-  end
-
-  def get_order_for_edit
-    get_order
-    fail 'You cant edit this one' unless @order.in_progress?
-  end
-
-  def address_invalid?
-    !(@order.billing_address && @order.billing_address.valid?) ||
-    !(@order.shipment_address && @order.shipment_address.valid?)
-  end
-
-  def delivery_invalid?
-    !(@order.shipment)
-  end
-
-  def payment_invalid?
-    !(@order.payment && @order.payment.valid?)
-  end
-
-
-
-  def check_user_for!(order)
-    if (current_user != order.user)
-      fail "Permission denied."
+  def go_to_next_step
+    puts 'next step'
+    case params[:order][:step]
+    when 'address'
+      redirect_to edit_delivery_checkout_path(@order)
+    when 'shipment'
+      redirect_to edit_payment_checkout_path(@order)
+    when 'payment'
+      redirect_to confirm_checkout_path(@order)
     end
   end
 
@@ -100,22 +80,12 @@ class CheckoutsController < ApplicationController
         :phone
       ],
       payment_attributes: [
+        :id,
         :card,
         :expiration_year,
         :expiration_month,
         :cvv
       ]
     )
-  end
-
-  def go_to_next_step
-    case params[:order][:step]
-    when 'address'
-      redirect_to edit_delivery_checkout_path(@order)
-    when 'shipment'
-      redirect_to edit_payment_checkout_path(@order)
-    when 'payment'
-      redirect_to confirm_checkout_path(@order)
-    end
   end
 end
