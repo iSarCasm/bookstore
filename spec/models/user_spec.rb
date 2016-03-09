@@ -21,4 +21,35 @@ RSpec.describe User, type: :model do
   it { should have_many(:payments).class_name('PaymentInfo') }
   it { should have_many(:orders) }
   it { should have_many(:reviews) }
+
+  describe '#create_with_omniauth' do
+    before do
+      @user_hash = Struct.new 'Hash' do
+        def provider
+          'facebook'
+        end
+
+        def uid
+          '12345'
+        end
+
+        def info
+          Struct.new 'Hashik' do
+            def email
+              'some_rofl@rofl.kek'
+            end
+          end.new
+        end
+      end.new
+    end
+
+    it 'returns a User by email' do
+      user = create(:user, email: 'some_rofl@rofl.kek')
+      expect(User.create_with_omniauth(@user_hash)).to eq user
+    end
+
+    it 'or creates new User' do
+      expect(User.create_with_omniauth(@user_hash).class).to eq User
+    end
+  end
 end

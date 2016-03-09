@@ -17,6 +17,8 @@ RSpec.describe Order, type: :model do
   it { should belong_to :payment }
   it { should belong_to :shipment }
 
+  it { should respond_to :aasm_state_enum }
+
   describe '#add_order_items' do
     it 'Creates OrderItems from CartItems' do
       some_book = create(:book)

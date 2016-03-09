@@ -16,26 +16,27 @@ RSpec.describe ShoppingCartsController, type: :controller do
       expect(response).to redirect_to :back
     end
 
-    # context 'when trying to add valid item' do
-    #   it 'adds item to cart' do
-    #     book = create(:book)
-    #     expect(controller.current_cart).to receive(:add)
-    #     patch :update, book: book
-    #   end
-    #
-    #   it 'adds coupon to cart' do
-    #     coupon = create(:coupon)
-    #     expect(controller.current_cart).to receive(:apply_coupon)
-    #     patch :update, coupon: coupon
-    #   end
-    # end
+    it 'adds coupon to cart' do
+      coupon = create(:coupon)
+      expect(controller.current_cart).to receive(:apply_coupon)
+      patch :update, coupon: coupon
+    end
   end
 
   describe '#checkout' do
-    it 'creates new order' do
-      sign_in create(:user)
-      expect(Order).to receive(:create_from_cart).and_return(create(:order))
-      post :checkout
+    context 'when signed in' do
+      it 'creates new order' do
+        sign_in create(:user)
+        expect(Order).to receive(:create_from_cart).and_return(create(:order))
+        post :checkout
+      end
+    end
+
+    context 'when guest' do
+      it 'redirects to sign in' do
+        post :checkout
+        expect(response).to redirect_to new_user_session_path
+      end
     end
   end
 

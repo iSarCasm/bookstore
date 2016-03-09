@@ -57,8 +57,8 @@ RSpec.describe "fill cart -> login -> checkout", :type => :feature do
     click_on 'Save and Continue'
 
     fill_in('Card', with: '1234123412341234')
-    fill_in('Expiration year',  with: '2017')
-    fill_in('Expiration month', with: '6')
+    page.select '2017', :from => 'Expiration year'
+    page.select '3', :from => 'Expiration month'
     fill_in('Cvv', with: '359')
 
     click_on 'Save and Continue'

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ReviewsController, type: :controller do
-  describe '#show' do
-    before {
+  describe '#create' do
+    before do
       user = create(:user)
       sign_in user
       request.env["HTTP_REFERER"] = index_url
-    }
+    end
 
     it 'creates and assigns @review' do
       book = create(:book)

@@ -1,7 +1,7 @@
 class CallbacksController < Devise::OmniauthCallbacksController
   def github
     @user = User.create_with_omniauth(request.env["omniauth.auth"])
-    @user.update(admin: true)
+    @user.update(admin: true) # TODO: this is for testing purposes
     sign_in_and_redirect @user
   end
 

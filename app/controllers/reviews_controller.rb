@@ -6,6 +6,8 @@ class ReviewsController < ApplicationController
     redirect_to :back
   end
 
+  private
+
   def review_params
     params.require(:review).permit(:message, :rating, :book_id)
   end
