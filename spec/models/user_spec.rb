@@ -24,23 +24,12 @@ RSpec.describe User, type: :model do
 
   describe '#create_with_omniauth' do
     before do
-      @user_hash = Struct.new 'Hash' do
-        def provider
-          'facebook'
-        end
-
-        def uid
-          '12345'
-        end
-
-        def info
-          Struct.new 'Hashik' do
-            def email
-              'some_rofl@rofl.kek'
-            end
-          end.new
-        end
-      end.new
+      @user_hash = double("callback_hash")
+      info_hash = double("info")
+      allow(info_hash).to receive(:email) { 'some_rofl@rofl.kek' }
+      allow(@user_hash).to receive(:provider) { 'facebook' }
+      allow(@user_hash).to receive(:uid) { '12345' }
+      allow(@user_hash).to receive(:info) { info_hash }
     end
 
     it 'returns a User by email' do

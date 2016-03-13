@@ -37,7 +37,7 @@ RSpec.describe 'pages/shop.html.haml' do
       pagination_stub(books)
       render
       categories.each do |category|
-        expect(rendered).to have_link(nil, href: index_path(category: category))
+        expect(rendered).to have_link(nil, href: shop_path(category: category))
       end
     end
 
