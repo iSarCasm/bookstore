@@ -4,19 +4,13 @@ en:
   header:
     home: 'Home'
     shop: 'Shop'
-    cart: 'Cart'
-    empty: 'EMPTY'
     orders: 'Orders'
     settings: 'Settings'
-    items: 'items'
     admin: 'Admin Panel'
 
   main:
     products: 'Books'
     categories: 'Categories'
-
-  cart:
-    add: 'Add to Cart'
 
   book:
     price: 'Price'

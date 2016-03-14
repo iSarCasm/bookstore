@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/iSarCasm/shopping_cart_engine
-  revision: f9372742246474d9afc2ac50675af77dcfdd1bf0
+  revision: 9fab13ac7a07478c7eca2b256a725e0d20e0f5e8
   specs:
     shopping_cart (0.1.14)
       rails (~> 4.2.5)

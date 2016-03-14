@@ -20,7 +20,7 @@
       %p
         %strong= "#{t('book.avg_rating')}:"
         = @book.rating
-      =render 'books/add', book: @book
+      =add_cart_button @book, text: t('cart.add')
   %br
     -if can? :create, Review
       .row.col-md-4
