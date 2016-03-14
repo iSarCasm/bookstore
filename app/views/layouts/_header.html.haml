@@ -24,7 +24,7 @@
       .navbar-right
         %ul.nav.navbar-nav
           %li.cart
-            %a{href: shopping_carts_path}
+            %a{href: shopping_cart.cart_path}
               = icon('shopping-cart')
               %strong= t('header.cart')
               = (current_cart.size == 0 ? "(#{t('header.empty')})" : "(#{current_cart.size } #{t('header.items')})") # wtf

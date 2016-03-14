@@ -21,6 +21,7 @@ class Ability
       can :read, Book
       can :show, Category
       can :read, Review
+      can :checkout, :cart
     end
   end
 end

@@ -19,6 +19,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
 end
 
+
 gem 'kaminari'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
@@ -35,6 +36,8 @@ gem 'rails_admin'
 gem 'carrierwave'
 gem "mini_magick"
 gem 'cancancan', '~> 1.10'
+
+gem 'shopping_cart', git: 'https://github.com/iSarCasm/shopping_cart_engine'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

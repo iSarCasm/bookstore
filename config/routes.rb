@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ShoppingCart::Engine => "/cart"
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {registrations: 'registrations',
                                   omniauth_callbacks: "callbacks"}
@@ -8,14 +10,6 @@ Rails.application.routes.draw do
 
   resources :books, only: [:show]
   resources :authors, only: [:show]
-
-  resource :shopping_carts, only: [:show, :update], path: '/cart' do
-    collection do
-      post    :add
-      delete  :clear
-      post    :checkout
-    end
-  end
 
   resources :orders, only: [:show, :index, :update]
 

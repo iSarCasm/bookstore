@@ -20,11 +20,6 @@ class ApplicationController < ActionController::Base
     redirect_to '/', :alert => exception.message
   end
 
-  def current_cart
-    @_shopping_cart ||= ShoppingCart.new(session)
-  end
-  helper_method :current_cart
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit({ billing_address_attributes:

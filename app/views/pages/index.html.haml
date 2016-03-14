@@ -19,7 +19,7 @@
                     %a{href: book_path(book)}= book.title
                   %p= truncate(book.desc, length: 100, separator: ' ')
                   %p= number_to_currency(book.price)
-                  =render 'books/add', book: book
+                  =add_cart_button book, text: t('cart.add')
         / Controls
         %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel__index", :role => "button"}
           %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
