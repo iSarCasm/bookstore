@@ -1,0 +1,12 @@
+en:
+  cart:
+    title: 'Cart'
+    empty: 'Empty'
+    items: 'Items'
+    subtotal: 'Subtotal'
+    add: 'Add to Cart'
+    price: 'Price'
+    quantity: 'Qnt'
+    total: 'Total'
+    clear: 'Clear'
+    checkout: 'Checkout'

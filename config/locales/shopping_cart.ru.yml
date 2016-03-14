@@ -1,0 +1,12 @@
+ru:
+  cart:
+    title: 'Корзина'
+    empty: 'Пусто'
+    items: 'Предметов'
+    subtotal: 'Итого'
+    add: 'В Корзину!'
+    price: 'Цена'
+    quantity: 'Кол-во'
+    total: 'Сумма'
+    clear: 'Очистить корзину'
+    checkout: 'Оплатить!'
