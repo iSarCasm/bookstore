@@ -14,6 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 # Assets
 gem 'normalize-rails'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'font-awesome-sass', '~> 4.5.0'
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
