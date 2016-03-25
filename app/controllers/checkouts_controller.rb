@@ -19,8 +19,12 @@ class CheckoutsController < ApplicationController
   end
 
   def update
+
+    
     @order.update(order_params)
+
     flash[:errors] = @order.errors.messages
+
     if @order.errors.empty?
       go_to_next_step
     else

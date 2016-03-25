@@ -53,6 +53,11 @@ RSpec.describe Book, type: :model do
 
       expect(Book.bestseller(3)).to match_array top_books
     end
+
+    it 'returns random when no orders yet' do
+      books = create_list(:book, 3)
+      expect(Book.bestseller(4)).to match_array books
+    end
   end
 
   describe '.from_category' do

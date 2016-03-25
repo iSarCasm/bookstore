@@ -28,10 +28,14 @@ class Book < ActiveRecord::Base
   end
 
   def self.bestseller(count = 5)
-    joins(order_items: :order)
-      .where(orders: {aasm_state: ['in_queue','in_delivery','delivered']})
-      .select('books.*, SUM(order_items.quantity) as buy_quantity')
-      .group('books.id').order('buy_quantity DESC').limit(3)
+    if Order.count > 0
+      joins(order_items: :order)
+        .where(orders: {aasm_state: ['in_queue','in_delivery','delivered']})
+        .select('books.*, SUM(order_items.quantity) as buy_quantity')
+        .group('books.id').order('buy_quantity DESC').limit(3)
+    else
+      Book.first(count) # Random books
+    end
   end
 
   def self.from_category(category = nil)
