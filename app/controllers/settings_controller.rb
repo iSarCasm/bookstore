@@ -5,4 +5,10 @@ class SettingsController < ApplicationController
     cookies.permanent[:educator_locale] = l
     redirect_to request.referer || index_url
   end
+
+  def change_currency
+    cookies[:current_currency] = params[:currency].to_s.strip.to_sym
+    # binding.pry
+    redirect_to request.referer || index_url
+  end
 end

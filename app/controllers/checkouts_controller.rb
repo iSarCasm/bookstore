@@ -19,7 +19,6 @@ class CheckoutsController < ApplicationController
   end
 
   def update
-    binding.pry
     if params[:use_billing_address]
       params[:order][:shipment_address_attributes] = params[:order][:billing_address_attributes].except(:id)
     end

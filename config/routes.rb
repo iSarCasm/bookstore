@@ -4,7 +4,9 @@ Rails.application.routes.draw do
                                   omniauth_callbacks: "callbacks"}
   root 'pages#index', as: :index
   get  '/shop', to: 'pages#shop', as: :shop
+
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
+  get '/change_currency/:currency', to: 'settings#change_currency', as: :change_currency
 
   resources :books, only: [:show]
   resources :authors, only: [:show]

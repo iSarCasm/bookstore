@@ -20,6 +20,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
 end
 
+gem 'money-rails'
 gem 'kaminari'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

@@ -23,6 +23,8 @@ class Book < ActiveRecord::Base
 
   paginates_per 9
 
+  monetize :price_cents
+
   def rating
     self.reviews.where(approved: true).average(:rating) || 0
   end

@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_cart
 
+  def current_currency
+    @_currency ||= cookies[:current_currency] || Money.default_currency
+  end
+  helper_method :current_currency
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit({ billing_address_attributes:

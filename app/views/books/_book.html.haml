@@ -5,4 +5,4 @@
   %strong
     %a{href: book_path(book)}= book.title
   %p= truncate(book.desc, length: 100, separator: ' ')
-  %p= number_to_currency(book.price)
+  %p= number_to_money book.price
