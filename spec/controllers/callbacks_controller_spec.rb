@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe CallbacksController, type: :controller do
   before do
     request.env["devise.mapping"] = Devise.mappings[:user] # If using Devise
+    request.env["HTTP_REFERER"] = index_url
   end
 
   describe '#facebook' do
@@ -11,7 +12,7 @@ RSpec.describe CallbacksController, type: :controller do
       get :facebook
     end
 
-    it 'redirects to user' do
+    it 'redirects back' do
       user = create(:user)
       allow(User).to receive(:create_with_omniauth).and_return(user)
       get :facebook
@@ -25,7 +26,7 @@ RSpec.describe CallbacksController, type: :controller do
       get :github
     end
 
-    it 'redirects to user' do
+    it 'redirects back' do
       user = create(:user)
       allow(User).to receive(:create_with_omniauth).and_return(user)
       get :github

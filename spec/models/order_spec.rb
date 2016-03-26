@@ -81,7 +81,7 @@ RSpec.describe Order, type: :model do
       book_2 = create(:book, price: 4)
       create(:order_item, book: book_1, quantity: 3, order: order)
       create(:order_item, book: book_2, quantity: 2, order: order)
-      expect(order.sum_without_discount).to eq 38
+      expect(order.sum_without_discount.to_s.to_i).to eq 38
     end
   end
 
@@ -91,7 +91,7 @@ RSpec.describe Order, type: :model do
       order.coupon = create(:coupon, discount: 0.1)
       book_1 = create(:book, price: 10)
       create(:order_item, book: book_1, quantity: 3, order: order)
-      expect(order.sum).to eq 27
+      expect(order.sum.to_s.to_i).to eq 27
     end
   end
 end

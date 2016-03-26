@@ -86,7 +86,7 @@ RSpec.describe ShoppingCart do
       book_2 = create(:book, price: 4)
       3.times { cart.add book_1 }
       2.times { cart.add book_2 }
-      expect(cart.sum_without_discount).to eq 38
+      expect(cart.sum_without_discount.to_s.to_i).to eq 38
     end
   end
 
@@ -107,7 +107,7 @@ RSpec.describe ShoppingCart do
       cart.apply_coupon(create(:coupon, discount: 0.1))
       book_1 = create(:book, price: 10)
       3.times { cart.add book_1 }
-      expect(cart.sum).to eq 27
+      expect(cart.sum.to_s.to_i).to eq 27
     end
   end
 

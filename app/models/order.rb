@@ -90,7 +90,7 @@ class Order < ActiveRecord::Base
   end
 
   def sum_without_discount
-    order_items.map{ |x| x.price }.inject(&:+) || 0
+    order_items.map{ |x| x.sum }.inject(&:+) || 0
   end
 
   def sum
