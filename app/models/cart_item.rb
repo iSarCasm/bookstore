@@ -17,11 +17,11 @@ class CartItem
   end
 
   def sum
-    book.price * @quantity
+    price * @quantity
   end
 
   def price
-    book.price
+    (book.price_cents * 0.01)
   end
 
   def title

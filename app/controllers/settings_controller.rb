@@ -8,7 +8,6 @@ class SettingsController < ApplicationController
 
   def change_currency
     cookies[:current_currency] = params[:currency].to_s.strip.to_sym
-    # binding.pry
     redirect_to request.referer || index_url
   end
 end

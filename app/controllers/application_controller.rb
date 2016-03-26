@@ -4,7 +4,23 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  after_filter :store_location
+
   before_action :set_locale
+
+  def store_location
+    return unless request.get?
+    if (request.path != "/users/sign_in" &&
+        request.path != "/users/sign_up" &&
+        request.path != "/users/sign_out" &&
+        !request.xhr?)
+      session[:previous_url] = request.fullpath
+    end
+  end
+
+  def after_sign_in_path_for(resource)
+    session[:previous_url] || root_url
+  end
 
   def set_locale
     if cookies[:educator_locale] && I18n.available_locales.include?(cookies[:educator_locale].to_sym)

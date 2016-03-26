@@ -29,7 +29,7 @@ class ShoppingCart
   end
 
   def sum_without_discount
-    @items.inject(0) { |sum, item| sum + item.sum }
+    @items.map{ |x| x.price }.inject(&:+) || 0
   end
 
   def sum
