@@ -118,6 +118,18 @@ class Order < ActiveRecord::Base
     !(self.payment && self.payment.valid?)
   end
 
+  def shipment_available?
+    !address_invalid?
+  end
+
+  def payment_available?
+    !address_invalid? && !delivery_invalid?
+  end
+
+  def confirm_available?
+    !address_invalid? && !delivery_invalid? && !payment_invalid?
+  end
+
   def billing_address
     (super rescue nil) || build_billing_address
   end

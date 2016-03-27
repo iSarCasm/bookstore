@@ -22,6 +22,9 @@ class CheckoutsController < ApplicationController
     if params[:use_billing_address]
       params[:order][:shipment_address_attributes] = params[:order][:billing_address_attributes].except(:id)
     end
+
+    params[:order][:payment_attributes][:card].gsub!(/\s+/, "") rescue nil
+
     @order.update(order_params)
 
     flash[:errors] = @order.errors.messages
@@ -50,7 +53,6 @@ class CheckoutsController < ApplicationController
   private
 
   def go_to_next_step
-    puts 'next step'
     case params[:order][:step]
     when 'address'
       redirect_to edit_delivery_checkout_path(@order)

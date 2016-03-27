@@ -1,35 +1,32 @@
 .container
   %h2
     Checkout
-  %h3.col-md-offset-1.col-md-2
-    %a{href: edit_address_checkout_path(@order), class: 'step'} Address
-  %h3.col-md-2
-    %a{href: edit_delivery_checkout_path(@order), class: 'step'} Shipment
-  %h3.col-md-2
-    .step{class: 'current'} Payment
-  %h3.col-md-2
-    .step Confirm
-  %h3.col-md-2
-    .step Complete
+  %center
+    .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
+      =link_to 'Address', edit_address_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-primary']
+      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
+      %button.btn.btn-default.disabled{:type => "button"} Complete
+  .row
+    = html_for_errors payment_error_messages_of(flash[:errors], :payment)
   .row
     =form_for @order, url: {controller: :checkouts, action: :update}  do |order|
-      .col-sm-6.col-sm-push-6
-        = html_for_errors payment_error_messages_of(flash[:errors], :payment)
-      .col-sm-6.col-sm-pull-6
+      .col-sm-4
         = order.fields_for :payment do |f|
           .field.form-group
             = f.label :card
-            = f.text_field :card, class: 'form-control'
+            = f.text_field :card, class: 'form-control', data: { format: 'XXXX-XXXX-XXXX-XXXX'}
           .row
-            .field.form-group.col-xs-4
+            .field.form-group.col-xs-6
               = f.label :expiration_year
               = f.select :expiration_year, (Time.now.year..2100).to_a, {}, class: 'form-control'
-            .field.form-group.col-xs-4
+            .field.form-group.col-xs-6
               = f.label :expiration_month
               = f.select :expiration_month, (1..12).to_a, {}, class: 'form-control'
-            .field.form-group.col-xs-4
-              = f.label :cvv
-              = f.text_field :cvv, class: 'form-control'
-      =order.hidden_field :step, value: @current_step
-      .actions
-        = order.submit 'Save and Continue', class: ['btn', 'btn-default']
+            .field.form-group.col-xs-12
+              = f.label :cvv, 'CVV'
+              = f.text_field :cvv, class: 'form-control', maxlength: 3
+        =order.hidden_field :step, value: @current_step
+        .actions
+          = order.submit 'Save and Continue', class: ['btn', 'btn-default']

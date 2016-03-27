@@ -19,8 +19,9 @@
           = f.submit "Log in", class: ['btn', 'btn-primary']
       %br
       %p
-        = link_to "Sign in with Github", "auth/github"
-      %p
-        = link_to "Sign in with FaceBook", "auth/facebook"
+        = link_to "auth/github" do
+          = image_tag('/images/github.gif', height: 64, width: 64)
+        = link_to "auth/facebook" do
+          = image_tag('/images/facebook.png', height: 64, width: 64)
       %br
       = render "devise/shared/links"

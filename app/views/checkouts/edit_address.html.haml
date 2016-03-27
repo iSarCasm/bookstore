@@ -1,37 +1,31 @@
 .container
   %h2
     Checkout
-  %h3.col-md-offset-1.col-md-2
-    .step{class: 'current'} Address
-  %h3.col-md-2
-    .step Shipment
-  %h3.col-md-2
-    .step Payment
-  %h3.col-md-2
-    .step Confirm
-  %h3.col-md-2
-    .step Complete
+  %center
+    .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
+      %button.btn.btn-primary{:type => "button"} Address
+      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-default', (@order.shipment_available? ? '' : 'disabled')]
+      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-default', (@order.payment_available? ? '' : 'disabled')]
+      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
+      %button.btn.btn-default.disabled{:type => "button"} Complete
   .row
     = form_for @order, url: {controller: :checkouts, action: :update} do |order|
       .row
-        .col-sm-6#billing
+        = html_for_errors address_error_messages_of(flash[:errors], :billing_address)
+        = html_for_errors address_error_messages_of(flash[:errors], :shipment_address)
+      .row
+        .col-sm-4#billing
           %h3 Billing Address
-          .col-sm-6.col-sm-push-6
-            = html_for_errors address_error_messages_of(flash[:errors], :billing_address)
-          .col-sm-6.col-sm-pull-6
-            = order.fields_for :billing_address do |f|
-              = render 'address/edit', f: f
-        .col-sm-6#shipment
+          = order.fields_for :billing_address do |f|
+            = render 'address/edit', f: f
+        .col-sm-4#shipment
           %h3 Shipment Address
-          .col-sm-6.col-sm-push-6
-            = html_for_errors address_error_messages_of(flash[:errors], :shipment_address)
-          .col-sm-6.col-sm-pull-6
-            = order.fields_for :shipment_address do |f|
-              .field.form-group
-                = label_tag :use_billing_address
-                = check_box_tag :use_billing_address, false
-              %div#shipment_address
-                = render 'address/edit', f: f
+          = order.fields_for :shipment_address do |f|
+            .field.form-group
+              = label_tag :use_billing_address
+              = check_box_tag :use_billing_address, false
+            %div#shipment_address
+              = render 'address/edit', f: f
         =order.hidden_field :step, value: @current_step
       .actions
         = order.submit 'Save and Continue', class: ['btn', 'btn-default']

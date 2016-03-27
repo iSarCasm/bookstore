@@ -1,16 +1,14 @@
 .container
   %h2
     Checkout
-  %h3.col-md-offset-1.col-md-2
-    %a{href: edit_address_checkout_path(@order), class: 'step'} Address
-  %h3.col-md-2
-    .step{class: 'current'} Shipment
-  %h3.col-md-2
-    .step Payment
-  %h3.col-md-2
-    .step Confirm
-  %h3.col-md-2
-    .step Complete
+  %center
+    .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
+      =link_to 'Address', edit_address_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-primary']
+      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-default', (@order.payment_available? ? '' : 'disabled')]
+      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
+      %button.btn.btn-default.disabled{:type => "button"} Complete
+  %br
   .row.col-md-12
     = form_for @order, url: {controller: :checkouts, action: :update}  do |order|
       - @available_shipments.each do |shipment|

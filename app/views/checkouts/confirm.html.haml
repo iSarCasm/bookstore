@@ -1,16 +1,13 @@
 .container
   %h2
     Checkout
-  %h3.col-md-offset-1.col-md-2
-    %a{href: edit_address_checkout_path(@order), class: 'step'} Address
-  %h3.col-md-2
-    %a{href: edit_delivery_checkout_path(@order), class: 'step'} Shipment
-  %h3.col-md-2
-    %a{href: edit_payment_checkout_path(@order), class: 'step'} Payment
-  %h3.col-md-2
-    .step{class: 'current'} Confirm
-  %h3.col-md-2
-    .step Complete
+  %center
+    .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
+      =link_to 'Address', edit_address_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-primary']
+      %button.btn.btn-default.disabled{:type => "button"} Complete
   .row
     .col-md-3
       %h3.title
