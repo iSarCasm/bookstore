@@ -1,0 +1,19 @@
+.col-sm-4#summary
+  .panel.panel-default.shipping
+    .panel-heading
+      %h4
+        = t('checkout.order_summary')
+    .panel-body
+      %table.table
+        %thead
+          %tr
+            %td= t('checkout.item_total')
+            %td= number_to_money @order.sum
+          %tr
+            %td= t('checkout.shipping')
+            %td
+              = number_to_money(Money.new(@order.shipment.cost*100, 'USD'))
+          %tr.info
+            %td= t('checkout.order_total')
+            %td
+              = number_to_money(@order.sum + Money.new(@order.shipment.cost*100, 'USD'))

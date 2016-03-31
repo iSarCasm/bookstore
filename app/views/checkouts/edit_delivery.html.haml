@@ -3,18 +3,21 @@
     Checkout
   %center
     .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
-      =link_to 'Address', edit_address_checkout_path(@order), class: ['btn', 'btn-default']
-      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-primary']
-      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-default', (@order.payment_available? ? '' : 'disabled')]
-      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
-      %button.btn.btn-default.disabled{:type => "button"} Complete
-  %br
+      =link_to t('checkout.address_step'), edit_address_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to t('checkout.shipment_step'), edit_delivery_checkout_path(@order), class: ['btn', 'btn-primary']
+      =link_to t('checkout.payment_step'), edit_payment_checkout_path(@order), class: ['btn', 'btn-default', (@order.payment_available? ? '' : 'disabled')]
+      =link_to t('checkout.confirm_step'), confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
+      %button.btn.btn-default.disabled{:type => "button"}= t('checkout.complete_step')
   .row.col-md-12
     = form_for @order, url: {controller: :checkouts, action: :update}  do |order|
-      - @available_shipments.each do |shipment|
-        .field.form-group
-          =order.radio_button 'shipment_id', shipment.id, checked: (@order.shipment_id == shipment.id)
-          =label "shipment_id_#{shipment.id}", "#{shipment.name} +$#{shipment.cost}"
-      =order.hidden_field :step, value: @current_step
-      .actions
-        = order.submit 'Save and Continue', class: ['btn', 'btn-default']
+      .row
+        .col-sm-8
+          %br
+          - @available_shipments.each do |shipment|
+            .field.form-group
+              =order.radio_button 'shipment_id', shipment.id, checked: (@order.shipment_id == shipment.id)
+              =label "shipment_id_#{shipment.id}", "#{shipment.name} +$#{shipment.cost}"
+        =render 'order_summary'
+        =order.hidden_field :step, value: @current_step
+        .actions
+          = order.submit t('checkout.save'), class: ['btn', 'btn-default']

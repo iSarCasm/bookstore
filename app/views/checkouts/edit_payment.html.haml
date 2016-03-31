@@ -3,30 +3,32 @@
     Checkout
   %center
     .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
-      =link_to 'Address', edit_address_checkout_path(@order), class: ['btn', 'btn-default']
-      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-default']
-      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-primary']
-      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
-      %button.btn.btn-default.disabled{:type => "button"} Complete
+      =link_to t('checkout.address_step'), edit_address_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to t('checkout.shipment_step'), edit_delivery_checkout_path(@order), class: ['btn', 'btn-default']
+      =link_to t('checkout.payment_step'), edit_payment_checkout_path(@order), class: ['btn', 'btn-primary']
+      =link_to t('checkout.confirm_step'), confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
+      %button.btn.btn-default.disabled{:type => "button"}= t('checkout.complete_step')
   .row
     = html_for_errors payment_error_messages_of(flash[:errors], :payment)
   .row
     =form_for @order, url: {controller: :checkouts, action: :update}  do |order|
-      .col-sm-4
-        = order.fields_for :payment do |f|
-          .field.form-group
-            = f.label :card
-            = f.text_field :card, class: 'form-control', data: { format: 'XXXX-XXXX-XXXX-XXXX'}
-          .row
+      .row
+        .col-sm-4
+          = order.fields_for :payment do |f|
+            .field.form-group.col-xs-12
+              = f.label :card, t('checkout.card')
+              = f.text_field :card, class: 'form-control', data: { format: 'XXXX-XXXX-XXXX-XXXX'}
             .field.form-group.col-xs-6
-              = f.label :expiration_year
+              = f.label :expiration_year, t('checkout.expiration_year')
               = f.select :expiration_year, (Time.now.year..2100).to_a, {}, class: 'form-control'
             .field.form-group.col-xs-6
-              = f.label :expiration_month
+              = f.label :expiration_month, t('checkout.expiration_month')
               = f.select :expiration_month, (1..12).to_a, {}, class: 'form-control'
             .field.form-group.col-xs-12
-              = f.label :cvv, 'CVV'
+              = f.label :cvv, t('checkout.cvv')
               = f.text_field :cvv, class: 'form-control', maxlength: 3
+        .col-sm-4
+        =render 'order_summary'
         =order.hidden_field :step, value: @current_step
         .actions
-          = order.submit 'Save and Continue', class: ['btn', 'btn-default']
+          = order.submit t('checkout.save'), class: ['btn', 'btn-default']

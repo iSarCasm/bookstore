@@ -3,11 +3,11 @@
     Checkout
   %center
     .btn-group.btn-group-md{"aria-label" => "Large button group", :role => "group"}
-      %button.btn.btn-primary{:type => "button"} Address
-      =link_to 'Shipment', edit_delivery_checkout_path(@order), class: ['btn', 'btn-default', (@order.shipment_available? ? '' : 'disabled')]
-      =link_to 'Payment', edit_payment_checkout_path(@order), class: ['btn', 'btn-default', (@order.payment_available? ? '' : 'disabled')]
-      =link_to 'Confirm', confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
-      %button.btn.btn-default.disabled{:type => "button"} Complete
+      %button.btn.btn-primary{:type => "button"}= t('checkout.address_step')
+      =link_to t('checkout.shipment_step'), edit_delivery_checkout_path(@order), class: ['btn', 'btn-default', (@order.shipment_available? ? '' : 'disabled')]
+      =link_to t('checkout.payment_step'), edit_payment_checkout_path(@order), class: ['btn', 'btn-default', (@order.payment_available? ? '' : 'disabled')]
+      =link_to t('checkout.confirm_step'), confirm_checkout_path(@order), class: ['btn', 'btn-default', (@order.confirm_available? ? '' : 'disabled')]
+      %button.btn.btn-default.disabled{:type => "button"}= t('checkout.complete_step')
   .row
     = form_for @order, url: {controller: :checkouts, action: :update} do |order|
       .row
@@ -15,17 +15,18 @@
         = html_for_errors address_error_messages_of(flash[:errors], :shipment_address)
       .row
         .col-sm-4#billing
-          %h3 Billing Address
+          %h3= t('checkout.billing')
           = order.fields_for :billing_address do |f|
             = render 'address/edit', f: f
         .col-sm-4#shipment
-          %h3 Shipment Address
+          %h3= t('checkout.shipment')
           = order.fields_for :shipment_address do |f|
             .field.form-group
               = label_tag :use_billing_address
               = check_box_tag :use_billing_address, false
             %div#shipment_address
               = render 'address/edit', f: f
+        =render 'order_summary'
         =order.hidden_field :step, value: @current_step
       .actions
-        = order.submit 'Save and Continue', class: ['btn', 'btn-default']
+        = order.submit t('checkout.save'), class: ['btn', 'btn-default']
