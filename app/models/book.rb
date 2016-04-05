@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  extend FriendlyId
   mount_uploader :image, PhotoUploader
 
   has_many :book_owns
@@ -20,6 +21,12 @@ class Book < ActiveRecord::Base
     only_integer: true,
     greater_than_or_equal_to: 0
   }
+
+  friendly_id :title, use: :slugged
+
+  def should_generate_new_friendly_id?
+    new_record? || slug.blank?
+  end
 
   paginates_per 9
 

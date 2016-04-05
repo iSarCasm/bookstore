@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
   get '/change_currency/:currency', to: 'settings#change_currency', as: :change_currency
 
-  resources :books, only: [:show]
+  resources :books, only: [:show] do
+    # get '/(:slug)', to: 'books#show', as: :show
+  end
   resources :authors, only: [:show]
 
   resource :shopping_carts, only: [:show, :update], path: '/cart' do

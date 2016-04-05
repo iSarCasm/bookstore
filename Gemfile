@@ -20,6 +20,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
 end
 
+gem 'friendly_id', '~> 5.1.0'
 gem 'money-rails'
 gem 'kaminari'
 gem 'turbolinks'
