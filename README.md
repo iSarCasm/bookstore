@@ -5,7 +5,7 @@
 ## As an Admin
 * I want to have access to admin panel.
 * I want to be able to manage (create/read/update/delete) books into admin panel. 
-** Book data:
+* * Book data:
 *** Title
 Short description
 Full description (should support markdown syntax)
