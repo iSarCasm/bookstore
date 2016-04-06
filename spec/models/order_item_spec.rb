@@ -25,7 +25,7 @@ RSpec.describe OrderItem, type: :model do
     it 'returns total cost' do
       book = build(:book, price: 10)
       order_item = build(:order_item, book: book, quantity: 3)
-      expect(order_item.sum).to eq 30
+      expect(order_item.sum.to_i).to eq 30
     end
   end
 end

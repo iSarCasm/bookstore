@@ -38,7 +38,7 @@ RSpec.describe "fill cart -> login -> checkout", :type => :feature do
       fill_in('Street address', with: '12 Main Street')
       fill_in('City',     with: 'The Big One')
       fill_in('Country',  with: 'MURICA')
-      fill_in('Zip',      with: '1488')
+      fill_in('ZIP',      with: '1488')
       fill_in('Phone',    with: '+1337 420 14 88')
     end
 
@@ -48,7 +48,7 @@ RSpec.describe "fill cart -> login -> checkout", :type => :feature do
       fill_in('Street address', with: '12 Main Street')
       fill_in('City',     with: 'The Big One')
       fill_in('Country',  with: 'MURICA')
-      fill_in('Zip',      with: '1488')
+      fill_in('ZIP',      with: '1488')
       fill_in('Phone',    with: '+1337 420 14 88')
     end
 
@@ -56,10 +56,10 @@ RSpec.describe "fill cart -> login -> checkout", :type => :feature do
     # leave default shipment
     click_on 'Save and Continue'
 
-    fill_in('Card', with: '1234123412341234')
-    page.select '2017', :from => 'Expiration year'
-    page.select '3', :from => 'Expiration month'
-    fill_in('Cvv', with: '359')
+    fill_in('Card', with: '1234 1234 1234 1234')
+    page.select '2017', :from => 'Expiration Year'
+    page.select '3', :from => 'Expiration Month'
+    fill_in('CVV', with: '359')
 
     click_on 'Save and Continue'
     click_on 'PLACE ORDER'

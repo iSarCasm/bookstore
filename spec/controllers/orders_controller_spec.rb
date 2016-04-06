@@ -24,5 +24,18 @@ RSpec.describe OrdersController, type: :controller do
       get :show, id: create(:order, user: user)
       expect(response.status).to eq(200)
     end
+
+    context 'cancan doesnt allow :show' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :show, @order
+      end
+
+      it do
+        get :show, id: @order
+        expect(response).to redirect_to(index_path)
+      end
+    end
   end
 end

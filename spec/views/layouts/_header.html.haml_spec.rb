@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "layouts/_header", type: :view, verify_stubs: false do
+  before do
+    stub_view(Money.default_currency, :current_currency)
+  end
+
   describe 'displays shopping cart' do
     it 'EMPTY when no items' do
       cart = ShoppingCart.new

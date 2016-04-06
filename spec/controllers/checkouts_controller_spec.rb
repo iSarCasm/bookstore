@@ -8,6 +8,19 @@ RSpec.describe CheckoutsController, type: :controller do
       get :edit_address, id: create(:order, user: user)
       expect(response.status).to eq(200)
     end
+
+    context 'cancan doesnt allow :edit_address' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :edit_address, @order
+      end
+
+      it do
+        get :edit_address, id: @order
+        expect(response).to redirect_to(index_path)
+      end
+    end
   end
 
   describe '#edit_delivery' do
@@ -25,6 +38,19 @@ RSpec.describe CheckoutsController, type: :controller do
       get :edit_delivery, id: create(:order, user: user)
       expect(assigns(:available_shipments)).to eq(Shipment.all.to_a)
     end
+
+    context 'cancan doesnt allow :edit_delivery' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :edit_delivery, @order
+      end
+
+      it do
+        get :edit_delivery, id: @order
+        expect(response).to redirect_to(index_path)
+      end
+    end
   end
 
   describe '#edit_payment' do
@@ -34,6 +60,19 @@ RSpec.describe CheckoutsController, type: :controller do
       get :edit_payment, id: create(:order, user: user)
       expect(response.status).to eq(200)
     end
+
+    context 'cancan doesnt allow :edit_payment' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :edit_payment, @order
+      end
+
+      it do
+        get :edit_payment, id: @order
+        expect(response).to redirect_to(index_path)
+      end
+    end
   end
 
   describe '#confirm' do
@@ -42,6 +81,19 @@ RSpec.describe CheckoutsController, type: :controller do
       sign_in user
       get :confirm, id: create(:order, user: user)
       expect(response.status).to eq(200)
+    end
+
+    context 'cancan doesnt allow :confirm' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :confirm, @order
+      end
+
+      it do
+        get :confirm, id: @order
+        expect(response).to redirect_to(index_path)
+      end
     end
   end
 
@@ -76,6 +128,19 @@ RSpec.describe CheckoutsController, type: :controller do
       patch :update, id: @order, order: {step: :address }
       expect(response).not_to redirect_to edit_delivery_checkout_path(@order)
     end
+
+    context 'cancan doesnt allow :update' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :update, @order
+      end
+
+      it do
+        get :update, id: @order
+        expect(response).to redirect_to(index_path)
+      end
+    end
   end
 
   describe '#place' do
@@ -93,6 +158,19 @@ RSpec.describe CheckoutsController, type: :controller do
       sign_in user
       post :place, id: order
       expect(order.reload.aasm_state).to eq "in_queue"
+    end
+
+    context 'cancan doesnt allow :place' do
+      before do
+        @order = create(:order)
+        redifine_abilities
+        @ability.cannot :place, @order
+      end
+
+      it do
+        get :place, id: @order
+        expect(response).to redirect_to(index_path)
+      end
     end
   end
 end

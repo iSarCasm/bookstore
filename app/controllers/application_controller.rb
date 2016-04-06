@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     if (request.path != "/users/sign_in" &&
         request.path != "/users/sign_up" &&
         request.path != "/users/sign_out" &&
+        request.path != "/users/confirmation" &&
         !request.xhr?)
       session[:previous_url] = request.fullpath
     end
