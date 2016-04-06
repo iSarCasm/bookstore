@@ -18,7 +18,7 @@
                   %strong
                     %a{href: book_path(book)}= book.title
                   %p= truncate(book.desc, length: 100, separator: ' ')
-                  %p= number_to_currency(book.price)
+                  %p= number_to_money book.price
                   =render 'books/add', book: book
         / Controls
         %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel__index", :role => "button"}
