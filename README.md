@@ -47,7 +47,7 @@
 # Tools Used
 * __Rails__
 * __PostgreSQL__
-* __RSpec, Capybara, ShouldaMatchers, Guard-RSpec, database_cleaner, TravisCI - for testing
+* __RSpec, Capybara, ShouldaMatchers, Guard-RSpec, database_cleaner, TravisCI__ - for testing
 * __simplecov__ - for test coverage
 * __HTML5, CSS3, SCSS, CoffeeScript, HAML, Bootstrap, jQuery__ - Frontend
 * __Devise + Omniauth(Facebook, Github)__ - Users and Auth
